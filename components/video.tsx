@@ -44,15 +44,22 @@ export default function Video({ src, caption, ratio }: VideoProps) {
   }, [inView]);
 
   return (
-    <div style={{ position: "relative", margin: "2rem 1rem" }}>
+    <div
+      style={{
+        position: "relative",
+        margin: "2rem 1rem",
+        overflow: "hidden",
+        borderRadius: "8px",
+      }}
+    >
       <div style={{ paddingBottom: ratio * 100 + "%" }} />
       <video
-        style={{ position: "absolute", top: 0, left: 0 }}
         loop
         muted
         autoPlay
         playsInline
         ref={setRefs}
+        style={{ borderRadius: "8px" }}
       >
         <source src={src} type="video/mp4" />
       </video>

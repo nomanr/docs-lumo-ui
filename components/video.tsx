@@ -1,21 +1,22 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import Image from "next/image";
 
 interface VideoProps {
   src: string;
   caption?: string;
   ratio: number;
+  thumbnail?: string;
 }
 
-export default function Video({ src, caption, ratio }: VideoProps) {
+export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
   const [inViewRef, inView] = useInView({ threshold: 1 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const setRefs = useCallback(
     (node: HTMLVideoElement | null) => {
-      // Ref's from useRef needs to have the node assigned to `current`
       videoRef.current = node;
-      // Callback refs, like the one from `useInView`, is a function that takes the node as an argument
       inViewRef(node);
 
       if (node) {
@@ -53,6 +54,7 @@ export default function Video({ src, caption, ratio }: VideoProps) {
       }}
     >
       <div style={{ paddingBottom: ratio * 100 + "%" }} />
+
       <video
         loop
         muted
@@ -60,9 +62,35 @@ export default function Video({ src, caption, ratio }: VideoProps) {
         playsInline
         ref={setRefs}
         style={{ borderRadius: "8px" }}
+        poster={thumbnail}
+        onPlaying={() => setLoading(false)}
       >
         <source src={src} type="video/mp4" />
       </video>
+      {loading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 16,
+            left: 16,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner />
+        </div>
+      )}
+      {loading && thumbnail && (
+        <Image
+          src={thumbnail}
+          alt="Video thumbnail"
+          layout="fill"
+          objectFit="cover"
+          style={{ borderRadius: "8px" }}
+          unoptimized
+        />
+      )}
       {caption && (
         <figcaption style={{ fontSize: ".9rem", textAlign: "center" }}>
           {caption}
@@ -71,3 +99,37 @@ export default function Video({ src, caption, ratio }: VideoProps) {
     </div>
   );
 }
+
+const Spinner = () => {
+  useEffect(() => {
+    const spinnerStyles = `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `;
+
+    const styleSheet = document.createElement("style");
+    styleSheet.setAttribute("type", "text/css");
+    styleSheet.innerText = spinnerStyles;
+    document.head.appendChild(styleSheet);
+
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []);
+
+  return (
+    <div
+      className="spinner"
+      style={{
+        width: "24px",
+        height: "24px",
+        border: "4px solid rgba(0, 0, 0, 0.1)",
+        borderTop: "4px solid #000",
+        borderRadius: "50%",
+        animation: "spin 1s linear infinite",
+      }}
+    />
+  );
+};

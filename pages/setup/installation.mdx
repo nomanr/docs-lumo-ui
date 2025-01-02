@@ -11,7 +11,7 @@ You can apply the plugin to either the root or the module level `build.gradle` f
 
 **Option 1: Apply to root level**
 
-```kotlin
+```kotlin copy
 plugins {
     id ("com.nomanr.plugin.lumo") version "0.0.1-alpha.4"
     // alias(libs.plugins.lumo) -- from the catalog
@@ -20,7 +20,7 @@ plugins {
 
 **Option 2: Apply to module level**
 
-```kotlin
+```kotlin copy
 // root level build.gradle.kts
 plugins {
     id ("com.nomanr.plugin.lumo") version "0.0.1-alpha.4" apply false
@@ -36,7 +36,7 @@ plugins {
 
 Once the gradle sync is complete, verify the plugin is integrated successfully:
 
-```bash
+```bash copy
 ./gradlew lumo --plugin-help
 ```
 
@@ -44,7 +44,7 @@ Once the gradle sync is complete, verify the plugin is integrated successfully:
 
 Run the following command to initialize the plugin:
 
-```bash
+```bash copy
 ./gradlew lumo --init
 ```
 

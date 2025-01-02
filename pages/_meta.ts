@@ -6,4 +6,5 @@ export default {
 
   index: "Introduction",
   setup: "Setup and configuration",
+  cli: "CLI",
 };

@@ -1,0 +1,126 @@
+# CLI
+
+Use the CLI to add components to your project.
+
+### plugin-help
+
+Use `--plugin-help` to display all available CLI commands and their functions.
+
+```bash copy
+./gradlew lumo --plugin-help
+```
+
+Expected Output
+
+```ansi
+[0;1;34mUsage: ./gradlew lumo --option <value>
+
+[0;1;34mOptions:
+[0;1;34m  --init                  Initialize Lumo UI Plugin
+[0;1;34m  --setup                 Setup theme to get started and verify the configs
+[0;1;34m  --required-deps         Returns the required dependencies to be added to the build.gradle.kts file
+[0;1;34m  --add <component>       Add a new Lumo UI Component
+[0;1;34m  --plugin-help           Display this help message
+```
+
+### init
+
+Use the `--init` command to initialize the plugin. This command creates a `lumo.properties` file in the root of your project with default configurations. The output will also display the required dependencies that need to be added to your project's build files.
+
+```bash copy
+./gradlew lumo --init
+```
+
+Expected Output
+
+```ansi
+> Task :lumo
+
+[0;1;34mAdd the following dependencies to your build.gradle.kts file:
+api(platform("androidx.compose:compose-bom:$version"))
+api("androidx.compose.foundation:foundation")
+api("androidx.compose.foundation:foundation-layout")
+api("androidx.compose.ui:ui")
+api("androidx.compose.ui:ui-tooling")
+api("androidx.compose.ui:ui-tooling-preview")
+api("androidx.compose.ui:ui-util")
+api("androidx.compose.material:material-ripple:$version")
+
+[0;1;32mDefault config file created at: lumo.properties (file:///lumo.properties)
+[0;1;32mInitialised successfully. List of required dependencies printed above.
+
+[0;1;32mBUILD SUCCESSFUL in 853ms
+```
+
+### setup
+
+Use the `--setup` command to generate the theme after configuring properties.
+
+```bash copy
+./gradlew lumo --setup
+```
+
+Expected Output
+
+```ansi
+> Task :lumo
+
+[0;1;34mGenerating Theme ...
+[0;1;32m'Theme' generated successfully.
+[0;1;34mGenerated files:
+[0;1;34mTheme.kt (file:///.../ui_components/Theme.kt)
+[0;1;34mColor.kt (file:///.../ui_components/Color.kt)
+[0;1;34mTypography.kt (file:///.../ui_components/Typography.kt)
+[0;1;34mRipple.kt (file:///.../ui_components/foundation/Ripple.kt)
+
+[0;1;32mBUILD SUCCESSFUL in 1s
+```
+
+### add
+
+Use the `--add` command to generate a new component, e.g. `Button`.
+
+```bash copy
+./gradlew lumo --add Button
+```
+
+Expected Output
+
+```ansi
+> Task :lumo
+
+[0;1;34mGenerating Button ...
+[0;1;32m'Button' generated successfully.
+[0;1;34mGenerated files:
+[0;1;34mButton.kt (file:////.../ui_components/components/Button.kt)
+[0;1;34mSurface.kt (file:////.../ui_components/components/Surface.kt)
+[0;1;34mButtonElevation.kt (file:////.../ui_components/foundation/ButtonElevation.kt)
+
+[0;1;32mBUILD SUCCESSFUL in 630ms
+```
+
+### required-deps
+
+Use the `--required-deps` command to return the required dependencies to be added to the `build.gradle.kts` file.
+
+```bash copy
+./gradlew lumo --required-deps
+```
+
+Expected Output
+
+```ansi
+> Task :lumo
+
+[0;1;34mAdd the following dependencies to your build.gradle.kts file:
+api(platform("androidx.compose:compose-bom:$version"))
+api("androidx.compose.foundation:foundation")
+api("androidx.compose.foundation:foundation-layout")
+api("androidx.compose.ui:ui")
+api("androidx.compose.ui:ui-tooling")
+api("androidx.compose.ui:ui-tooling-preview")
+api("androidx.compose.ui:ui-util")
+api("androidx.compose.material:material-ripple:$version")
+
+[0;1;32mBUILD SUCCESSFUL in 783ms
+```

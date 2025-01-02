@@ -62,17 +62,20 @@ export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
         playsInline
         ref={setRefs}
         style={{ borderRadius: "8px" }}
-        poster={thumbnail}
+        poster={"/images/placeholder.png"}
         onPlaying={() => setLoading(false)}
       >
         <source src={src} type="video/mp4" />
       </video>
+
       {loading && (
         <div
           style={{
             position: "absolute",
-            top: 16,
-            left: 16,
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -80,16 +83,6 @@ export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
         >
           <Spinner />
         </div>
-      )}
-      {loading && thumbnail && (
-        <Image
-          src={thumbnail}
-          alt="Video thumbnail"
-          layout="fill"
-          objectFit="cover"
-          style={{ borderRadius: "8px" }}
-          unoptimized
-        />
       )}
       {caption && (
         <figcaption style={{ fontSize: ".9rem", textAlign: "center" }}>

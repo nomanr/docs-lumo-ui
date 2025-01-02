@@ -17,4 +17,5 @@ export default {
     title: "Components",
     type: "separator",
   },
+  accordion: "Accordion",
 };

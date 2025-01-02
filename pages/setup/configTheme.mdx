@@ -1,0 +1,126 @@
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Configuring the theme
+
+Run this command to generate the theme after configuring properties.
+
+```bash
+./gradlew lumo --setup
+```
+
+It will generate, `Theme.kt`, `Colors.kt`, `Typography.kt`, and `foundation` files.
+
+<FileTree>
+  <FileTree.Folder name="myProject" defaultOpen>
+    <FileTree.Folder name="app" />
+    <FileTree.Folder
+      name="ui-components/src/main/java/com/nomanr/ui_components"
+      defaultOpen
+    >
+      <FileTree.Folder name="foundation">
+        <FileTree.File name="Ripple.kt" />
+      </FileTree.Folder>
+      <FileTree.File name="Theme.kt" />
+      <FileTree.File name="Colors.kt" />
+      <FileTree.File name="Typography.kt" />
+    </FileTree.Folder>
+    <FileTree.File name="lumo.properties" />
+  </FileTree.Folder>
+</FileTree>
+
+<Callout type="info">
+  The generated theme implementation shown below is a simplified example.
+</Callout>
+
+```kotlin
+object AppTheme {
+    val colors: Colors
+        @ReadOnlyComposable @Composable get() = LocalColors.current
+
+    val typography: Typography
+        @ReadOnlyComposable @Composable get() = LocalTypography.current
+}
+
+@Composable
+fun AppTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    val colors = if (isDarkTheme) DarkColors else LightColors
+    ...
+    CompositionLocalProvider(
+        LocalColors provides colors,
+        LocalTypography provides typography,
+        LocalIndication provides rippleIndication,
+        LocalTextSelectionColors provides selectionColors,
+        LocalContentColor provides colors.contentColorFor(colors.background),
+        LocalTextStyle provides typography.body1,
+        content = content
+    )
+}
+```
+
+### Colors
+
+The `Colors` provides a comprehensive structure for managing theme colors in both light and dark modes.
+
+```kotlin
+@Immutable
+data class Colors(
+    val primary: Color,
+    val onPrimary: Color,
+    ...
+    val scrim: Color,
+    val elevation: Color,
+)
+
+internal val LightColors = Colors(
+    primary = Black,
+    ...
+    elevation = Gray700,
+)
+
+internal val DarkColors = Colors(
+    primary = White,
+    ...
+    elevation = Gray200,
+)
+
+fun Colors.contentColorFor(backgroundColor: Color): Color {
+    return when (backgroundColor) {
+        primary -> onPrimary
+        ...
+        else -> Color.Unspecified
+    }
+}
+```
+
+### Typography
+
+Provides a structured way to define text styles such as headings, body text, and labels.
+
+```kotlin
+data class Typography(
+    val h1: TextStyle = TextStyle(
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        ...
+    ),
+    val body1: TextStyle = TextStyle(
+        ...
+    ),
+    val label1: TextStyle = TextStyle(
+        ...
+    ),
+    ...
+)
+
+val typography = Typography()
+val LocalTypography = staticCompositionLocalOf { typography }
+```
+
+### Foundation
+
+The foundation package provides essential utilities and defaults for theming, such as ripple effects, elevation, button styling, and system bar configurations.

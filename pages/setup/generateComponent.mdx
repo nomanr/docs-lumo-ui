@@ -1,0 +1,44 @@
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# Generating your first component
+
+Everything has been set up, now you can generate your first component.
+
+```bash
+./gradlew lumo --add Button
+```
+
+This will generate a Button component in the `components` folder under the specified directory in your module.
+
+<Callout type="info">
+  The generated component can be a single file or a folder with multiple files.
+</Callout>
+<Callout type="info">
+  A component may require other components to function properly. For example,
+  Button requires Surface, so Surface will be automatically generated along with
+  it.
+</Callout>
+
+<FileTree>
+  <FileTree.Folder name="myProject" defaultOpen>
+    <FileTree.Folder name="app" />
+    <FileTree.Folder
+      name="ui-components/src/main/java/com/nomanr/ui_components"
+      defaultOpen
+    >
+      <FileTree.Folder name="components" defaultOpen>
+        <FileTree.File name="Button.kt" />
+        <FileTree.File name="Surface.kt" />
+      </FileTree.Folder>
+      <FileTree.Folder name="foundation" defaultOpen>
+        <FileTree.File name="ButtonElevation.kt" />
+        <FileTree.File name="Ripple.kt" />
+      </FileTree.Folder>
+      <FileTree.File name="Theme.kt" />
+      <FileTree.File name="Colors.kt" />
+      <FileTree.File name="Typography.kt" />
+    </FileTree.Folder>
+    <FileTree.File name="lumo.properties" />
+  </FileTree.Folder>
+</FileTree>

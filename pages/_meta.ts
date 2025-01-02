@@ -5,10 +5,5 @@ export default {
   },
 
   index: "Introduction",
-
-  nav_bar_item_components: {
-    title: "Components",
-    href: "/accordion",
-    type: "page",
-  },
+  setup: "Setup and configuration",
 };

@@ -1,0 +1,53 @@
+import { Steps } from "nextra/components";
+
+# Setting up the plugin
+
+Apply and configure the plugin.
+
+<Steps>
+### Apply
+
+You can apply the plugin to either the root or the module level `build.gradle` file.
+
+**Option 1: Apply to root level**
+
+```kotlin
+plugins {
+    id ("com.nomanr.plugin.lumo") version "0.0.1-alpha.4"
+    // alias(libs.plugins.lumo) -- from the catalog
+}
+```
+
+**Option 2: Apply to module level**
+
+```kotlin
+// root level build.gradle.kts
+plugins {
+    id ("com.nomanr.plugin.lumo") version "0.0.1-alpha.4" apply false
+}
+
+// module level e.g. ui-components/build.gradle.kts
+plugins {
+    id("com.nomanr.plugin.lumo")
+}
+```
+
+### Verify
+
+Once the gradle sync is complete, verify the plugin is integrated successfully:
+
+```bash
+./gradlew lumo --plugin-help
+```
+
+### Initialize
+
+Run the following command to initialize the plugin:
+
+```bash
+./gradlew lumo --init
+```
+
+This will create a `lumo.properties` file in the root of your project with default configurations. The output will also display the required dependencies that need to be added to your project's build files.
+
+</Steps>

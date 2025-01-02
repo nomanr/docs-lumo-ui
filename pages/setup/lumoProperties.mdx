@@ -1,0 +1,63 @@
+import { Table, Td, Th, Tr } from "nextra/components";
+import { FileTree } from "nextra/components";
+import { Callout } from "nextra/components";
+
+# lumo.properties
+
+```properties
+# Lumo UI Plugin
+# This file is used to store configurations for the Lumo UI Plugin
+# Do not delete this file
+
+ThemeName=AppTheme
+ComponentsDir=ui-components/src/main/java/com/nomanr/ui_components
+PackageName=com.nomanr.ui_components
+```
+
+The `lumo.properties` is generated at the root of your project when you run the `./gradlew lumo --init` command.
+
+<FileTree>
+  <FileTree.Folder name="myProject" defaultOpen>
+    <FileTree.Folder name="app" />
+    <FileTree.Folder name="ui-components" />
+    <FileTree.File name="build.gradle.kts" />
+    <FileTree.File name="lumo.properties" />
+    <FileTree.File name="settings.gradle.kts" />
+  </FileTree.Folder>
+</FileTree>
+
+The `lumo.properties` file contains the necessary configurations for the plugin.
+
+<br />
+<br />
+
+<Table>
+  <thead>
+    <Tr>
+      <Th>Property</Th>
+      <Th>Description</Th>
+    </Tr>
+  </thead>
+  <tbody>
+    <Tr>
+      <Td>`ThemeName`</Td>
+      <Td>
+        Name of the theme class that will be generated, e.g. `AppTheme`,
+        `MaterialTheme`.
+      </Td>
+    </Tr>
+    <Tr>
+      <Td>`ComponentsDir`</Td>
+      <Td>The directory where the components will be generated.</Td>
+    </Tr>
+    <Tr>
+      <Td>`PackageName`</Td>
+      <Td>Package name for the generated components</Td>
+    </Tr>
+  </tbody>
+</Table>
+
+<Callout type="info">
+  The plugin checks for the `lumo.properties` file in your project's root to
+  determine if it's initialized.
+</Callout>

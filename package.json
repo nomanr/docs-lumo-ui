@@ -1,5 +1,5 @@
 {
-  "name": "site-compose-ui",
+  "name": "site-lumo-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,11 +15,15 @@
   "dependencies": {
     "@types/node": "^22.9.3",
     "@types/react": "^18.3.12",
+    "dompurify": "^3.2.3",
     "next": "^15.0.3",
     "nextra": "^3.2.4",
     "nextra-theme-docs": "^3.2.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.2.0"
   }
 }

@@ -1,5 +1,23 @@
-/* Global styles for Lumo UI documentation */
-
 .nextra-breadcrumb {
   display: none;
+}
+
+.nextra-tag-light {
+  background-color: #000;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
+.nextra-tag-dark {
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: inline-block;
 }

@@ -1,10 +1,148 @@
 import Video from "@components/video";
-import { Bleed } from "nextra-theme-docs";
+import Tag, { TagContainer } from "@components/tag";
 
 # Accordion
 
-The Accordion component allows you to display collapsible content panels for presenting information in a limited amount of space.
+Displays collapsible content panels for organizing and hiding content that can be shown on demand.
 
-<Bleed>
-  <Video src="https://files.catbox.moe/7d2yk9.mp4" />
-</Bleed>
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+<Video src="https://files.catbox.moe/7d2yk9.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Accordion
+```
+
+## Usage
+
+### Basic Accordion
+
+Create a simple expandable panel:
+
+```kotlin copy
+Accordion(
+    headerContent = { Text("Header") },
+    bodyContent = { Text("Body Content") }
+)
+```
+
+### Customized Accordion
+
+Add styling and custom behavior:
+
+```kotlin copy
+Accordion(
+    modifier = Modifier.padding(16.dp),
+    headerModifier = Modifier.background(Color.Red),
+    animate = true,
+    headerContent = {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Custom Header")
+            Icon(Icons.Default.KeyboardArrowDown, "Expand")
+        }
+    },
+    bodyContent = {
+        Text("Customized content with padding",
+             modifier = Modifier.padding(16.dp))
+    }
+)
+```
+
+### Accordion Group
+
+Manage multiple accordions with coordinated behavior:
+
+```kotlin copy
+val groupState = rememberAccordionGroupState(
+    count = 3,
+    allowMultipleOpen = false // Only one accordion can be open at a time
+)
+
+Column {
+    repeat(3) { index ->
+        Accordion(
+            state = groupState.getState(index),
+            headerContent = { Text("Header $index") },
+            bodyContent = { Text("Body Content $index") }
+        )
+    }
+}
+```
+
+## API Documentation
+
+### Accordion
+
+Creates a collapsible section with a header that controls the visibility of its content.
+
+#### Parameters
+
+| Parameter           | Type                       | Default                                   | Description                                  |
+| ------------------- | -------------------------- | ----------------------------------------- | -------------------------------------------- |
+| `modifier`          | `Modifier`                 | `Modifier`                                | Modifier for the root container              |
+| `headerModifier`    | `Modifier`                 | `Modifier`                                | Modifier specifically for the header section |
+| `state`             | `AccordionState`           | `rememberAccordionState()`                | Controls the accordion's state               |
+| `animate`           | `Boolean`                  | `true`                                    | Enables/disables animations                  |
+| `interactionSource` | `MutableInteractionSource` | `remember { MutableInteractionSource() }` | Handles user interactions                    |
+| `headerContent`     | `@Composable () -> Unit`   | -                                         | Header content (clickable by default)        |
+| `bodyContent`       | `@Composable () -> Unit`   | -                                         | Body content (shown when expanded)           |
+
+### AccordionState
+
+Manages the state of a single accordion instance.
+
+```kotlin
+// Create a standalone accordion state
+val state = rememberAccordionState(
+    initiallyExpanded = false,
+    onExpandedChange = { isExpanded ->
+        // Handle state changes
+    }
+)
+```
+
+#### Properties and Methods
+
+| Name         | Type       | Description               |
+| ------------ | ---------- | ------------------------- |
+| `expanded`   | `Boolean`  | Current expansion state   |
+| `enabled`    | `Boolean`  | Interaction enabled state |
+| `clickable`  | `Boolean`  | Header clickability       |
+| `toggle()`   | `Function` | Toggles expanded state    |
+| `collapse()` | `Function` | Collapses the accordion   |
+| `expand()`   | `Function` | Expands the accordion     |
+
+### AccordionGroupState
+
+Coordinates multiple accordions working together.
+
+```kotlin
+// Create a group state
+val groupState = rememberAccordionGroupState(
+    count = 3,
+    allowMultipleOpen = false
+)
+
+// Access individual accordion states
+val firstAccordionState = groupState.getState(0)
+```
+
+#### Properties and Methods
+
+| Name                | Type       | Description                                 |
+| ------------------- | ---------- | ------------------------------------------- |
+| `count`             | `Int`      | Number of accordions in group               |
+| `allowMultipleOpen` | `Boolean`  | Whether multiple accordions can be expanded |
+| `getState(index)`   | `Function` | Gets state for specific accordion           |
+| `collapseAll()`     | `Function` | Collapses all accordions                    |
+| `expand(index)`     | `Function` | Expands specific accordion                  |

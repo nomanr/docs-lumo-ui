@@ -8,12 +8,14 @@ const Tag = ({
   children: React.ReactNode;
   style?: React.CSSProperties;
 }) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [tagClass, setTagClass] = useState("nextra-tag-light");
 
   useEffect(() => {
-    setTagClass(theme === "dark" ? "nextra-tag-dark" : "nextra-tag-light");
-  }, [theme]);
+    setTagClass(
+      resolvedTheme === "dark" ? "nextra-tag-dark" : "nextra-tag-light"
+    );
+  }, [resolvedTheme]);
 
   return (
     <div

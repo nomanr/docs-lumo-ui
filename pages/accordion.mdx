@@ -3,13 +3,12 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Accordion
 
-Displays collapsible content panels for organizing and hiding content that can be shown on demand.
+Displays collapsible content panels.
 
 <TagContainer>
   <Tag>Android</Tag>
   <Tag>Kotlin Multiplatform</Tag>
 </TagContainer>
-
 <Video src="https://files.catbox.moe/7d2yk9.mp4" />
 
 <br />
@@ -22,9 +21,7 @@ Displays collapsible content panels for organizing and hiding content that can b
 
 ## Usage
 
-### Basic Accordion
-
-Create a simple expandable panel:
+#### Basic Example
 
 ```kotlin copy
 Accordion(
@@ -33,40 +30,10 @@ Accordion(
 )
 ```
 
-### Customized Accordion
-
-Add styling and custom behavior:
+#### Group Example
 
 ```kotlin copy
-Accordion(
-    modifier = Modifier.padding(16.dp),
-    headerModifier = Modifier.background(Color.Red),
-    animate = true,
-    headerContent = {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Custom Header")
-            Icon(Icons.Default.KeyboardArrowDown, "Expand")
-        }
-    },
-    bodyContent = {
-        Text("Customized content with padding",
-             modifier = Modifier.padding(16.dp))
-    }
-)
-```
-
-### Accordion Group
-
-Manage multiple accordions with coordinated behavior:
-
-```kotlin copy
-val groupState = rememberAccordionGroupState(
-    count = 3,
-    allowMultipleOpen = false // Only one accordion can be open at a time
-)
+val groupState = rememberAccordionGroupState(count = 3, allowMultipleOpen = false)
 
 Column {
     repeat(3) { index ->
@@ -83,21 +50,25 @@ Column {
 
 ### Accordion
 
-Creates a collapsible section with a header that controls the visibility of its content.
+The `Accordion` composable creates a collapsible section for content with a header and body that expand or collapse with user interaction.
+
+---
 
 #### Parameters
 
-| Parameter           | Type                       | Default                                   | Description                                  |
-| ------------------- | -------------------------- | ----------------------------------------- | -------------------------------------------- |
-| `modifier`          | `Modifier`                 | `Modifier`                                | Modifier for the root container              |
-| `headerModifier`    | `Modifier`                 | `Modifier`                                | Modifier specifically for the header section |
-| `state`             | `AccordionState`           | `rememberAccordionState()`                | Controls the accordion's state               |
-| `animate`           | `Boolean`                  | `true`                                    | Enables/disables animations                  |
-| `interactionSource` | `MutableInteractionSource` | `remember { MutableInteractionSource() }` | Handles user interactions                    |
-| `headerContent`     | `@Composable () -> Unit`   | -                                         | Header content (clickable by default)        |
-| `bodyContent`       | `@Composable () -> Unit`   | -                                         | Body content (shown when expanded)           |
+| Parameter           | Type                       | Description                                                           |
+| ------------------- | -------------------------- | --------------------------------------------------------------------- |
+| `modifier`          | `Modifier`                 | Styles and layouts the root container.                                |
+| `headerModifier`    | `Modifier`                 | Styles the header container.                                          |
+| `state`             | `AccordionState`           | Controls the expanded/collapsed state of the accordion.               |
+| `animate`           | `Boolean`                  | Enables or disables expand/collapse animations.                       |
+| `interactionSource` | `MutableInteractionSource` | Handles user interactions such as clicks.                             |
+| `headerContent`     | `@Composable () -> Unit`   | Content composable for the header section (clickable by default).     |
+| `bodyContent`       | `@Composable () -> Unit`   | Content composable for the body section (visible only when expanded). |
 
-### AccordionState
+---
+
+### Accordion State
 
 Manages the state of a single accordion instance.
 
@@ -111,18 +82,27 @@ val state = rememberAccordionState(
 )
 ```
 
-#### Properties and Methods
+#### Properties
 
-| Name         | Type       | Description               |
-| ------------ | ---------- | ------------------------- |
-| `expanded`   | `Boolean`  | Current expansion state   |
-| `enabled`    | `Boolean`  | Interaction enabled state |
-| `clickable`  | `Boolean`  | Header clickability       |
-| `toggle()`   | `Function` | Toggles expanded state    |
-| `collapse()` | `Function` | Collapses the accordion   |
-| `expand()`   | `Function` | Expands the accordion     |
+| Property            | Type                | Description                                                         |
+| ------------------- | ------------------- | ------------------------------------------------------------------- |
+| `expanded`          | `Boolean`           | Indicates whether the accordion is expanded.                        |
+| `enabled`           | `Boolean`           | Controls whether the accordion is interactable.                     |
+| `clickable`         | `Boolean`           | Determines if the accordion header is clickable.                    |
+| `onExpandedChange`  | `(Boolean) -> Unit` | Callback triggered whenever the accordion's expanded state changes. |
+| `animationProgress` | `Float`             | Current progress of the expand/collapse animation.                  |
 
-### AccordionGroupState
+#### Methods
+
+| Method             | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| `toggle()`         | Toggles the accordion between expanded and collapsed states. |
+| `updateProgress()` | Updates the animation progress (internal use).               |
+| `collapse()`       | Collapses the accordion.                                     |
+
+---
+
+### Accordion Group State
 
 Coordinates multiple accordions working together.
 
@@ -137,12 +117,17 @@ val groupState = rememberAccordionGroupState(
 val firstAccordionState = groupState.getState(0)
 ```
 
-#### Properties and Methods
+#### Properties
 
-| Name                | Type       | Description                                 |
-| ------------------- | ---------- | ------------------------------------------- |
-| `count`             | `Int`      | Number of accordions in group               |
-| `allowMultipleOpen` | `Boolean`  | Whether multiple accordions can be expanded |
-| `getState(index)`   | `Function` | Gets state for specific accordion           |
-| `collapseAll()`     | `Function` | Collapses all accordions                    |
-| `expand(index)`     | `Function` | Expands specific accordion                  |
+| Property            | Type      | Default | Description                                                     |
+| ------------------- | --------- | ------- | --------------------------------------------------------------- |
+| `count`             | `Int`     | -       | Number of accordions in the group.                              |
+| `allowMultipleOpen` | `Boolean` | `false` | Determines if multiple accordions can be open at the same time. |
+
+#### Methods
+
+| Method            | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `getState(index)` | Returns the `AccordionState` for a given index. |
+| `collapseAll()`   | Collapses all accordions in the group.          |
+| `expand(index)`   | Expands the accordion at the given index.       |

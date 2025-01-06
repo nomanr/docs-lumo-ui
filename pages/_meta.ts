@@ -18,4 +18,5 @@ export default {
     type: "separator",
   },
   accordion: "Accordion",
+  "alert-dialog": "Alert Dialog",
 };

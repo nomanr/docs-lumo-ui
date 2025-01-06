@@ -1,0 +1,104 @@
+import Video from "@components/video";
+import Tag, { TagContainer } from "@components/tag";
+
+# Alert Dialog
+
+Displays modal dialogs for important information, decisions, or user input.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+<Video src="https://files.catbox.moe/r7vrpv.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add AlertDialog
+```
+
+## Usage
+
+### Basic Example
+
+```kotlin copy
+if (visible) {
+    AlertDialog(
+        onDismissRequest = { /* Handle dismiss */ },
+        onConfirmClick = { /* Handle confirm */ },
+        title = "Simple Alert",
+        text = "This is a basic alert dialog with default buttons",
+        confirmButtonText = "OK",
+        dismissButtonText = "Cancel"
+    )
+}
+```
+
+### Custom Dialog
+
+```kotlin copy
+BasicAlertDialog(onDismissRequest = { state.showCustomContentDialog = false }) {
+    Column(
+        modifier = Modifier
+            .background(AppTheme.colors.primary)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        CompositionLocalProvider(
+            LocalContentColor provides AppTheme.colors.onPrimary
+        ) {
+            Text("Custom Content", style = AppTheme.typography.h4)
+
+            Text("This dialog allows for fully customizable content.")
+
+            Button(
+                text = "Close",
+                variant = ButtonVariant.Secondary,
+                onClick = { state.showCustomContentDialog = false },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+```
+
+## API Documentation
+
+### AlertDialog
+
+The `AlertDialog` composable creates a modal dialog with customizable content, buttons, and styling.
+
+#### Parameters
+
+| Parameter           | Type                        | Default              | Description                                       |
+| ------------------- | --------------------------- | -------------------- | ------------------------------------------------- |
+| `onDismissRequest`  | `() -> Unit`                | -                    | Called when dialog should be dismissed            |
+| `onConfirmClick`    | `() -> Unit`                | -                    | Called when confirm button is clicked             |
+| `title`             | `String`                    | -                    | Dialog title text                                 |
+| `text`              | `String`                    | -                    | Dialog content text                               |
+| `confirmButtonText` | `String`                    | "OK"                 | Text for confirm button                           |
+| `dismissButtonText` | `String?`                   | "Cancel"             | Text for dismiss button (null to hide)            |
+| `icon`              | `@Composable (() -> Unit)?` | null                 | Optional icon to display above title              |
+| `shape`             | `Shape`                     | `RoundedCornerShape` | Dialog corner shape                               |
+| `containerColor`    | `Color`                     | `White`              | Background color of dialog                        |
+| `iconContentColor`  | `Color`                     | `Primary`            | Color of the icon                                 |
+| `titleContentColor` | `Color`                     | `Primary`            | Color of the title text                           |
+| `textContentColor`  | `Color`                     | `Primary`            | Color of the content text                         |
+| `elevation`         | `Dp`                        | `4.dp`               | Dialog elevation shadow                           |
+| `properties`        | `DialogProperties`          | `Default`            | Window properties for the dialog                  |
+| `content`           | `@Composable (() -> Unit)?` | null                 | Optional custom content instead of default layout |
+
+### BasicAlertDialog
+
+This is the foundational component for fully custom content.
+
+#### Parameters
+
+| Parameter          | Type                     | Description                            |
+| ------------------ | ------------------------ | -------------------------------------- |
+| `onDismissRequest` | `() -> Unit`             | Called when dialog should be dismissed |
+| `modifier`         | `Modifier`               | Modifier for the dialog container      |
+| `properties`       | `DialogProperties`       | Window properties for the dialog       |
+| `content`          | `@Composable () -> Unit` | Custom content to display in dialog    |

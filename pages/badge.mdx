@@ -3,4 +3,77 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Badge
 
+A small overlay for showing notifications, counts, or status indicators on other UI elements.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/wctsul.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Badge
+```
+
+## Usage
+
+### Basic Example
+
+```kotlin copy
+// just a dot
+Badge()
+
+// with content
+Badge {
+    Text("9+")
+}
+```
+
+### BadgedBox Example
+
+```kotlin copy
+BadgedBox(
+    badge = {
+        Badge(
+            containerColor = AppTheme.colors.primary
+        ) {
+            Text("NEW")
+        }
+    },
+    content = {
+        Icon(Icons.Default.Email, "Messages")
+    }
+)
+```
+
+## API Documentation
+
+### BadgedBox
+
+The `BadgedBox` composable displays a badge in the top-end position of its content.
+
+#### Parameters
+
+| Parameter  | Type                              | Description                                     |
+| ---------- | --------------------------------- | ----------------------------------------------- |
+| `badge`    | `@Composable BoxScope.() -> Unit` | Badge content to be displayed                   |
+| `modifier` | `Modifier`                        | Modifier for the container                      |
+| `content`  | `@Composable BoxScope.() -> Unit` | Main content that the badge will be attached to |
+
+### Badge
+
+The `Badge` composable creates the actual badge element that can be empty (dot) or contain content.
+
+#### Parameters
+
+| Parameter        | Type                                 | Default                           | Description                       |
+| ---------------- | ------------------------------------ | --------------------------------- | --------------------------------- |
+| `modifier`       | `Modifier`                           | `Modifier`                        | Modifier for the badge            |
+| `containerColor` | `Color`                              | `BadgeDefaults.containerColor`    | Background color of the badge     |
+| `contentColor`   | `Color`                              | `contentColorFor(containerColor)` | Color of the badge content        |
+| `content`        | `@Composable (RowScope.() -> Unit)?` | `null`                            | Optional content inside the badge |

@@ -1,4 +1,56 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
 
-# Badge
+# Divider
+
+A thin line that groups content in lists and layouts.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Divider
+```
+
+## Usage
+
+### Horizontal Divider
+
+```kotlin copy
+HorizontalDivider(
+    modifier = Modifier.fillMaxWidth(),
+    thickness = 1.dp,
+    color = AppTheme.colors.surface
+)
+```
+
+### Vertical Divider
+
+```kotlin copy
+VerticalDivider(
+    modifier = Modifier.fillMaxHeight(),
+    thickness = 1.dp,
+    color = AppTheme.colors.surface
+)
+```
+
+## API Documentation
+
+### Divider Types
+
+| Component           | Description                  |
+| ------------------- | ---------------------------- |
+| `HorizontalDivider` | Line that spans horizontally |
+| `VerticalDivider`   | Line that spans vertically   |
+
+### Parameters
+
+| Parameter   | Type       | Description                   |
+| ----------- | ---------- | ----------------------------- |
+| `modifier`  | `Modifier` | Modifier for the divider      |
+| `thickness` | `Dp`       | Thickness of the divider line |
+| `color`     | `Color`    | Color of the divider          |

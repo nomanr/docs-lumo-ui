@@ -3,4 +3,73 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Chip
 
+A compact element that represents an input, attribute, or action.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/0gu06p.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Chip
+```
+
+## Usage
+
+### Basic Chip
+
+```kotlin copy
+Chip(
+    onClick = { /* Handle click */ }
+) {
+    Text("Basic Chip")
+}
+```
+
+### Chip with Icon
+
+```kotlin copy
+Chip(
+    onClick = { /* Handle click */ },
+    leadingIcon = {
+        Icon(
+            Icons.Default.Star,
+            contentDescription = null,
+            modifier = Modifier.size(ChipDefaults.ChipIconSize)
+        )
+    }
+) {
+    Text("Chip with Icon")
+}
+```
+
+## API Documentation
+
+### Chip Types
+
+| Component      | Description                               |
+| -------------- | ----------------------------------------- |
+| `Chip`         | Basic chip with optional onClick          |
+| `ElevatedChip` | Chip with elevation and shadow            |
+| `OutlinedChip` | Chip with border and no default elevation |
+
+### Parameters
+
+| Parameter           | Type                        | Description                         |
+| ------------------- | --------------------------- | ----------------------------------- |
+| `modifier`          | `Modifier`                  | Modifier for the chip               |
+| `enabled`           | `Boolean`                   | Whether the chip is enabled         |
+| `selected`          | `Boolean`                   | Whether the chip is selected        |
+| `onClick`           | `() -> Unit`                | Callback when chip is clicked       |
+| `contentPadding`    | `PaddingValues`             | Padding around chip content         |
+| `shape`             | `Shape`                     | Shape of the chip                   |
+| `leadingIcon`       | `@Composable (() -> Unit)?` | Optional icon before content        |
+| `trailingIcon`      | `@Composable (() -> Unit)?` | Optional icon after content         |
+| `label`             | `@Composable () -> Unit`    | Content to display inside the chip  |
+| `interactionSource` | `MutableInteractionSource`  | Source of interactions for the chip |

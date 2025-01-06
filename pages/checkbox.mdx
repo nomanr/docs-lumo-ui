@@ -3,4 +3,69 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Checkbox
 
+A three state checkbox component.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/4is3m6.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Checkbox
+```
+
+## Usage
+
+### Basic Checkbox
+
+```kotlin copy
+var isChecked by remember { mutableStateOf(false) }
+
+Checkbox(
+    checked = isChecked,
+    onCheckedChange = { isChecked = it }
+)
+```
+
+### Tri-State Checkbox
+
+```kotlin copy
+var triState by remember { mutableStateOf(ToggleableState.Off) }
+
+TriStateCheckbox(
+    state = triState,
+    onClick = {
+        triState = when (triState) {
+            ToggleableState.Off -> ToggleableState.Indeterminate
+            ToggleableState.Indeterminate -> ToggleableState.On
+            ToggleableState.On -> ToggleableState.Off
+        }
+    }
+)
+```
+
+## API Documentation
+
+### Checkbox Types
+
+| Component          | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| `Checkbox`         | Standard two-state checkbox (checked/unchecked)        |
+| `TriStateCheckbox` | Three-state checkbox (checked/unchecked/indeterminate) |
+
+### Parameters
+
+| Parameter           | Type                       | Description                             |
+| ------------------- | -------------------------- | --------------------------------------- |
+| `checked`           | `Boolean`                  | Current checked state                   |
+| `onCheckedChange`   | `((Boolean) -> Unit)?`     | Callback when checkbox state changes    |
+| `modifier`          | `Modifier`                 | Modifier for the checkbox               |
+| `enabled`           | `Boolean`                  | Whether the checkbox is enabled         |
+| `colors`            | `CheckboxColors`           | Colors for different checkbox states    |
+| `interactionSource` | `MutableInteractionSource` | Source of interactions for the checkbox |

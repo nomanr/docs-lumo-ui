@@ -3,4 +3,108 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Button
 
+A customizable button component that supports different variants, states, and styles.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/mkmff4.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Button
+```
+
+## Usage
+
+### Basic Example
+
+```kotlin copy
+// Primary button
+Button(
+    text = "Primary",
+    variant = ButtonVariant.Primary,
+    onClick = { /* handle click */ }
+)
+
+// Outlined button
+Button(
+    text = "Outlined",
+    variant = ButtonVariant.PrimaryOutlined,
+    onClick = { /* handle click */ }
+)
+
+```
+
+### Button With Content
+
+```kotlin copy
+Button(
+    variant = ButtonVariant.Primary,
+    onClick = { /* handle click */ }
+){
+    Row {
+        Icon(Icons.Default.Star, "Favorites")
+        Text("Favorites")
+    }
+}
+```
+
+### ButtonVariant
+
+```kotlin {2} copy
+Button(
+    variant = ButtonVariant.PrimaryOutlined,
+    onClick = { /* handle click */ }
+){
+    Text("Click me!")
+}
+```
+
+Button variants control the visual appearance of buttons by applying different combinations of colors, borders, and effects. Each variant is designed for specific use cases:
+
+- Filled variants use solid background colors
+- Outlined variants use borders
+- Elevated variants add shadows and solid background colors
+- Ghost variants are subtle with only colored content
+
+| Type     | Variant               | Description                                     |
+| -------- | --------------------- | ----------------------------------------------- |
+| Filled   | `Primary`             | Solid background with primary brand color       |
+|          | `Secondary`           | Solid background with secondary color           |
+|          | `Destructive`         | Solid background with error color               |
+| Outlined | `PrimaryOutlined`     | Primary color border and text                   |
+|          | `SecondaryOutlined`   | Secondary color border and text                 |
+|          | `DestructiveOutlined` | Error color border and text                     |
+| Elevated | `PrimaryElevated`     | Primary color with drop shadow                  |
+|          | `SecondaryElevated`   | Secondary color with drop shadow                |
+|          | `DestructiveElevated` | Error color with drop shadow                    |
+| Ghost    | `PrimaryGhost`        | Subtle primary colored text                     |
+|          | `SecondaryGhost`      | Subtle secondary colored text                   |
+|          | `DestructiveGhost`    | Subtle error colored text                       |
+|          | `Ghost`               | Transparent with `LocalContentColor` text color |
+
+## API Documentation
+
+### Button
+
+The `Button` composable creates a clickable button with various styles and states.
+
+#### Parameters
+
+| Parameter           | Type                        | Description                             |
+| ------------------- | --------------------------- | --------------------------------------- |
+| `modifier`          | `Modifier`                  | Modifier for the button                 |
+| `text`              | `String?`                   | Text to display in the button           |
+| `enabled`           | `Boolean`                   | Whether the button is enabled           |
+| `loading`           | `Boolean`                   | Whether to show loading state           |
+| `variant`           | `ButtonVariant`             | Style variant of the button             |
+| `onClick`           | `() -> Unit`                | Callback when button is clicked         |
+| `contentPadding`    | `PaddingValues`             | Padding around button content           |
+| `interactionSource` | `MutableInteractionSource`  | Handles button interactions             |
+| `content`           | `@Composable (() -> Unit)?` | Optional custom content instead of text |

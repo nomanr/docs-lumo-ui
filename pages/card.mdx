@@ -3,4 +3,81 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Card
 
+A surface-based container that groups related content and actions.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/axb2mp.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Card
+```
+
+## Usage
+
+### Basic Card
+
+```kotlin copy
+Card(
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+) {
+    Text(
+        text = "Basic Card",
+        modifier = Modifier.padding(16.dp)
+    )
+}
+```
+
+### Interactive Card
+
+```kotlin copy
+OutlinedCard(
+    onClick = { /* Handle click */ },
+    colors = CardDefaults.cardColors(
+        containerColor = AppTheme.colors.surface,
+        contentColor = AppTheme.colors.onSurface
+    ),
+    elevation = CardDefaults.cardElevation(
+        defaultElevation = 2.dp,
+        pressedElevation = 4.dp
+    )
+) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Interactive Card")
+        Text("Click me!")
+    }
+}
+```
+
+## API Documentation
+
+### Card Types
+
+| Component      | Description                               |
+| -------------- | ----------------------------------------- |
+| `Card`         | Basic card with optional onClick          |
+| `ElevatedCard` | Card with default elevation               |
+| `OutlinedCard` | Card with border and no default elevation |
+
+### Parameters
+
+| Parameter           | Type                                 | Description                                  |
+| ------------------- | ------------------------------------ | -------------------------------------------- |
+| `modifier`          | `Modifier`                           | Modifier for the card                        |
+| `onClick`           | `() -> Unit`                         | Optional click handler for interactive cards |
+| `enabled`           | `Boolean`                            | Whether the card is interactive when clicked |
+| `shape`             | `Shape`                              | Shape of the card                            |
+| `colors`            | `CardColors`                         | Colors for the card container and content    |
+| `elevation`         | `CardElevation`                      | Elevation values for different states        |
+| `border`            | `BorderStroke?`                      | Optional border for the card                 |
+| `interactionSource` | `MutableInteractionSource`           | Source of interactions for the card          |
+| `content`           | `@Composable ColumnScope.() -> Unit` | Content to display inside the card           |

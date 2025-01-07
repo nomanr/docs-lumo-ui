@@ -3,4 +3,73 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Surface
 
+A container that represents a surface with elevation, shape, and border.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/ewuxzr.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Surface
+```
+
+## Usage
+
+### Basic Surface
+
+```kotlin copy
+Surface(
+    color = AppTheme.colors.surface,
+    shadowElevation = 4.dp,
+    shape = RoundedCornerShape(8.dp)
+) {
+    Text(
+        text = "Surface Content",
+        modifier = Modifier.padding(16.dp)
+    )
+}
+```
+
+### Clickable Surface
+
+```kotlin copy
+Surface(
+    onClick = { /* Handle click */ },
+    color = AppTheme.colors.primary,
+    contentColor = AppTheme.colors.onPrimary,
+    shape = RoundedCornerShape(12.dp),
+    shadowElevation = 8.dp,
+    border = BorderStroke(1.dp, AppTheme.colors.border)
+) {
+    Text(
+        text = "Clickable Surface",
+        modifier = Modifier.padding(16.dp)
+    )
+}
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter           | Type                       | Description                     |
+| ------------------- | -------------------------- | ------------------------------- |
+| `modifier`          | `Modifier`                 | Modifier for the surface        |
+| `shape`             | `Shape`                    | Shape of the surface            |
+| `color`             | `Color`                    | Background color                |
+| `contentColor`      | `Color`                    | Color for the content           |
+| `shadowElevation`   | `Dp`                       | Elevation shadow size           |
+| `border`            | `BorderStroke?`            | Optional border for the surface |
+| `onClick`           | `(() -> Unit)?`            | Optional click handler          |
+| `enabled`           | `Boolean`                  | Whether surface is enabled      |
+| `selected`          | `Boolean`                  | Whether surface is selected     |
+| `checked`           | `Boolean`                  | Whether surface is checked      |
+| `interactionSource` | `MutableInteractionSource` | Source of interactions          |
+| `content`           | `@Composable () -> Unit`   | Content to display              |

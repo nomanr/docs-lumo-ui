@@ -3,4 +3,69 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Switch
 
+A toggleable component that allows users to switch between two states.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/epg4v3.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Switch
+```
+
+## Usage
+
+### Basic Switch
+
+```kotlin copy
+var checked by remember { mutableStateOf(false) }
+
+Switch(
+    checked = checked,
+    onCheckedChange = { checked = it }
+)
+```
+
+### Custom Switch
+
+```kotlin copy
+Switch(
+    checked = checked,
+    onCheckedChange = { checked = it },
+    enabled = true,
+    colors = SwitchDefaults.colors(
+        checkedThumbColor = AppTheme.colors.onPrimary,
+        checkedTrackColor = AppTheme.colors.primary,
+        uncheckedThumbColor = AppTheme.colors.primary,
+        uncheckedTrackColor = AppTheme.colors.background
+    ),
+    thumbContent = {
+        Icon(
+            imageVector = Icons.Default.Check,
+            contentDescription = null,
+            modifier = Modifier.size(12.dp)
+        )
+    }
+)
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter           | Type                        | Description                 |
+| ------------------- | --------------------------- | --------------------------- |
+| `checked`           | `Boolean`                   | Current state of the switch |
+| `onCheckedChange`   | `((Boolean) -> Unit)?`      | Callback when state changes |
+| `modifier`          | `Modifier`                  | Modifier for the switch     |
+| `thumbContent`      | `@Composable (() -> Unit)?` | Optional content in thumb   |
+| `enabled`           | `Boolean`                   | Whether switch is enabled   |
+| `colors`            | `SwitchColors`              | Colors for different states |
+| `interactionSource` | `MutableInteractionSource`  | Source of interactions      |

@@ -1,0 +1,50 @@
+import { Callout } from "nextra/components";
+
+# Composables
+
+The composables library provides complex component implementations that are used by some Lumo UI components.
+
+**[https://github.com/nomanr/composables](https://github.com/nomanr/composables)**
+
+<Callout type="warning">
+  While I strongly prefer to avoid abstracting components into a separate
+  library, the composables library was created as a necessary compromise to
+  handle complex component implementations that would otherwise bloat the UI
+  components.
+</Callout>
+
+<details>
+<summary>**Why do I need it?**</summary>
+
+Some UI components like Modal Bottom Sheet and Slider require complex implementations involving animations, state management, and intricate layouts. The composables library was introduced as a last resort to handle these implementations while keeping the end components lightweight.
+
+</details>
+
+<details>
+<summary>**What if I don't want to use it?**</summary>
+
+If you don't want to use the composables library, you can copy-paste the components from the [GitHub](https://github.com/nomanr/composables) into your app.
+
+</details>
+
+## Installation
+
+Add the composables dependency to your app's `build.gradle.kts`:
+
+```kotlin copy
+dependencies {
+    implementation("com.nomanr:composables:$version")
+}
+```
+
+<Callout type="info">
+  Check the [latest version](https://github.com/nomanr/composables/releases) on
+  GitHub.
+</Callout>
+
+## Components Using Composables
+
+The following Lumo UI components use implementations from the composables library:
+
+- [Modal Bottom Sheet](/modal-bottom-sheet)
+- [Slider](/slider)

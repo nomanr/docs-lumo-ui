@@ -1,6 +1,88 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
 
-# Textfield
+# TextField
+
+A customizable text input component that supports various input types and decorations.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
 
 <Video src="https://files.catbox.moe/bmbwzf.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add TextField
+```
+
+## Usage
+
+### TextField Example
+
+```kotlin copy
+var text1 by remember { mutableStateOf("") }
+var text2 by remember { mutableStateOf("") }
+var text3 by remember { mutableStateOf("") }
+
+TextField(
+    value = text1,
+    onValueChange = { text1 = it },
+    label = { Text("Label") },
+    placeholder = { Text("Placeholder") }
+)
+
+OutlinedTextField(
+    value = text2,
+    onValueChange = { text2 = it },
+    label = { Text("Label") },
+    placeholder = { Text("Placeholder") }
+)
+
+UnderlinedTextField(
+    value = text3,
+    onValueChange = { text3 = it },
+    label = { Text("Label") },
+    placeholder = { Text("Placeholder") }
+)
+```
+
+## API Documentation
+
+### TextField Types
+
+| Component             | Description                     |
+| --------------------- | ------------------------------- |
+| `TextField`           | Basic filled style text input   |
+| `OutlinedTextField`   | Text input with outlined style  |
+| `UnderlinedTextField` | Text input with underline style |
+
+### Parameters
+
+| Parameter              | Type                        | Description                     |
+| ---------------------- | --------------------------- | ------------------------------- |
+| `value`                | `String`                    | Current text value              |
+| `onValueChange`        | `(String) -> Unit`          | Callback when text changes      |
+| `modifier`             | `Modifier`                  | Modifier for the text field     |
+| `enabled`              | `Boolean`                   | Whether field is enabled        |
+| `readOnly`             | `Boolean`                   | Whether field is read-only      |
+| `textStyle`            | `TextStyle`                 | Style for input text            |
+| `label`                | `@Composable (() -> Unit)?` | Label content above the field   |
+| `placeholder`          | `@Composable (() -> Unit)?` | Placeholder when field is empty |
+| `leadingIcon`          | `@Composable (() -> Unit)?` | Icon at the start of the field  |
+| `trailingIcon`         | `@Composable (() -> Unit)?` | Icon at the end of the field    |
+| `prefix`               | `@Composable (() -> Unit)?` | Fixed content before the input  |
+| `suffix`               | `@Composable (() -> Unit)?` | Fixed content after the input   |
+| `supportingText`       | `@Composable (() -> Unit)?` | Helper text below the field     |
+| `isError`              | `Boolean`                   | Whether to show error state     |
+| `visualTransformation` | `VisualTransformation`      | Transform for the visual output |
+| `keyboardOptions`      | `KeyboardOptions`           | Keyboard configuration          |
+| `keyboardActions`      | `KeyboardActions`           | Keyboard action handlers        |
+| `singleLine`           | `Boolean`                   | Whether to limit to single line |
+| `maxLines`             | `Int`                       | Maximum number of lines         |
+| `shape`                | `Shape`                     | Shape of the text field         |
+| `colors`               | `TextFieldColors`           | Colors for different states     |

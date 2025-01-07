@@ -1,5 +1,86 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
+import { Callout } from "nextra/components";
 
-# Badge
+# Text
 
+A component for displaying text with various styles and configurations.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+<Video src="https://files.catbox.moe/d92d5a.mp4" />
+
+<br />
+
+<Callout type="info">
+  Text is a component that displays text with various styles and configurations.
+  You can define your own typography after [setting up the
+  theme](/setup/configTheme).
+</Callout>
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Text
+```
+
+## Usage
+
+### Basic Text
+
+```kotlin copy
+Text(
+    text = "Hello World",
+    style = AppTheme.typography.body1
+)
+```
+
+### Styled Text
+
+```kotlin copy
+Text(
+    text = "Styled Text",
+    color = AppTheme.colors.primary,
+    fontSize = 20.sp,
+    fontWeight = FontWeight.Bold,
+    textAlign = TextAlign.Center,
+    maxLines = 2,
+    overflow = TextOverflow.Ellipsis
+)
+```
+
+### Resource Text
+
+```kotlin copy
+Text(
+    textRes = R.string.welcome_message,
+    style = AppTheme.typography.h1
+)
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter        | Type              | Description                 |
+| ---------------- | ----------------- | --------------------------- |
+| `text`           | `String`          | Text to display             |
+| `textRes`        | `@StringRes Int`  | String resource ID          |
+| `modifier`       | `Modifier`        | Modifier for the text       |
+| `color`          | `Color`           | Text color                  |
+| `fontSize`       | `TextUnit`        | Size of the text            |
+| `fontStyle`      | `FontStyle?`      | Style of the font           |
+| `fontWeight`     | `FontWeight?`     | Weight of the font          |
+| `fontFamily`     | `FontFamily?`     | Font family to use          |
+| `letterSpacing`  | `TextUnit`        | Spacing between letters     |
+| `textDecoration` | `TextDecoration?` | Text decoration style       |
+| `textAlign`      | `TextAlign`       | Text alignment              |
+| `lineHeight`     | `TextUnit`        | Height of each line         |
+| `overflow`       | `TextOverflow`    | How to handle text overflow |
+| `softWrap`       | `Boolean`         | Whether to wrap text        |
+| `maxLines`       | `Int`             | Maximum number of lines     |
+| `minLines`       | `Int`             | Minimum number of lines     |
+| `style`          | `TextStyle`       | Text style to apply         |

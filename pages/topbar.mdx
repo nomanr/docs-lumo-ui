@@ -1,6 +1,93 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
 
-# Topbar
+# TopBar
+
+A customizable top app bar that supports different scroll behaviors and layouts.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
 
 <Video src="https://files.catbox.moe/hvg7u9.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add TopBar
+```
+
+## Usage
+
+### Basic TopBar
+
+```kotlin copy
+TopBar {
+    Text(
+        text = "Title",
+        style = AppTheme.typography.h3,
+        modifier = Modifier.align(Alignment.Center)
+    )
+}
+```
+
+### Scrollable TopBar
+
+```kotlin copy
+val scrollBehavior = TopBarDefaults.enterAlwaysScrollBehavior()
+
+Scaffold(
+    topBar = {
+        TopBar(
+            scrollBehavior = scrollBehavior,
+            colors = TopBarColors(
+                containerColor = AppTheme.colors.surface,
+                scrolledContainerColor = AppTheme.colors.surfaceVariant
+            )
+        ) {
+            Text("Scrollable Title")
+        }
+    }
+) { padding ->
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        contentPadding = padding
+    ) {
+        items(30) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                Spacer(modifier = Modifier.height(60.dp))
+            }
+        }
+    }
+}
+
+```
+
+## API Documentation
+
+### TopBar Parameters
+
+| Parameter        | Type                     | Description                   |
+| ---------------- | ------------------------ | ----------------------------- |
+| `modifier`       | `Modifier`               | Modifier for the top bar      |
+| `scrollBehavior` | `TopBarScrollBehavior?`  | Controls scroll behavior      |
+| `colors`         | `TopBarColors`           | Colors for different states   |
+| `windowInsets`   | `WindowInsets?`          | Window insets for the top bar |
+| `content`        | `@Composable () -> Unit` | Content of the top bar        |
+
+### Scroll Behaviors
+
+| Behavior                           | Description                           |
+| ---------------------------------- | ------------------------------------- |
+| `pinnedScrollBehavior`             | TopBar stays fixed while scrolling    |
+| `enterAlwaysScrollBehavior`        | TopBar scrolls with content           |
+| `exitUntilCollapsedScrollBehavior` | TopBar collapses until minimum height |

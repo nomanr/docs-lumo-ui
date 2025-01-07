@@ -1,6 +1,106 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
 
-# OTP Textfield
+# OTP TextField
+
+A specialized text input component for one-time passwords and verification codes.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
 
 <Video src="https://files.catbox.moe/cyn2st.mp4" />
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add OTPTextField
+```
+
+## Usage
+
+### Basic OTP TextField
+
+```kotlin copy
+val otpState = rememberOtpState(length = 4)
+
+OTPTextField(
+    state = otpState,
+    onComplete = { code ->
+        // Handle completed OTP
+    }
+)
+```
+
+### OTP TextField Types
+
+```kotlin copy
+// Filled OTP TextField
+OTPTextField(
+    state = otpState,
+    onComplete = { code ->
+        // Handle completed OTP
+    }
+)
+
+// Outlined OTP TextField
+OutlinedOTPTextField(
+    state = otpState,
+    onComplete = { code ->
+        // Handle completed OTP
+    }
+)
+
+// Underlined OTP TextField
+UnderlinedOTPTextField(
+    state = otpState,
+    onComplete = { code ->
+        // Handle completed OTP
+    }
+)
+```
+
+## API Documentation
+
+### OTP TextField Types
+
+| Component                | Description                    |
+| ------------------------ | ------------------------------ |
+| `OTPTextField`           | Basic filled style OTP input   |
+| `OutlinedOTPTextField`   | OTP input with outlined style  |
+| `UnderlinedOTPTextField` | OTP input with underline style |
+
+### Parameters
+
+| Parameter              | Type                   | Default            | Description                    |
+| ---------------------- | ---------------------- | ------------------ | ------------------------------ |
+| `modifier`             | `Modifier`             | `Modifier`         | Modifier for the component     |
+| `state`                | `OTPState`             | `rememberOtpState` | State holder for OTP input     |
+| `enabled`              | `Boolean`              | `true`             | Whether the input is enabled   |
+| `readOnly`             | `Boolean`              | `false`            | Whether the input is read-only |
+| `isError`              | `Boolean`              | `false`            | Whether to show error state    |
+| `autoFocus`            | `Boolean`              | `true`             | Whether to focus first field   |
+| `textStyle`            | `TextStyle`            | `typography.h3`    | Text style for input           |
+| `colors`               | `OTPTextFieldColors`   | `defaults`         | Colors for different states    |
+| `visualTransformation` | `VisualTransformation` | `None`             | Transform displayed text       |
+| `onComplete`           | `(String) -> Unit`     | `{}`               | Callback when OTP is complete  |
+
+### OTPState
+
+Use `rememberOtpState` to create and remember OTP state:
+
+```kotlin copy
+val otpState = rememberOtpState(
+    length = 4 // Number of OTP digits
+)
+```
+
+#### Properties
+
+| Property       | Type            | Description                   |
+| -------------- | --------------- | ----------------------------- |
+| `code`         | `String`        | Current OTP value             |
+| `length`       | `Int`           | Number of OTP digits          |
+| `isComplete()` | `() -> Boolean` | Whether all digits are filled |

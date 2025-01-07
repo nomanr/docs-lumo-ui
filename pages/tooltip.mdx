@@ -3,4 +3,96 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Tooltip
 
+A popup component that displays informative text when users long-press an element.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/9mtisx.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Tooltip
+```
+
+## Usage
+
+### Basic Tooltip
+
+```kotlin copy
+val tooltipState = rememberTooltipState()
+
+TooltipBox(
+    tooltip = {
+        Tooltip {
+            Text("This is a tooltip")
+        }
+    },
+    state = tooltipState
+) {
+    Button(onClick = {}) {
+        Text("Hover me")
+    }
+}
+```
+
+### Persistent Tooltip
+
+```kotlin copy
+val tooltipState = rememberTooltipState(isPersistent = true)
+
+TooltipBox(
+    tooltip = {
+        Tooltip(
+            containerColor = AppTheme.colors.surface,
+            shadowElevation = 4.dp,
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Text("Persistent tooltip")
+        }
+    },
+    state = tooltipState
+) {
+    IconButton(onClick = {}) {
+        Icon(Icons.Default.Info, "Info")
+    }
+}
+```
+
+## API Documentation
+
+### TooltipBox Parameters
+
+| Parameter          | Type                                  | Description                    |
+| ------------------ | ------------------------------------- | ------------------------------ |
+| `modifier`         | `Modifier`                            | Modifier for the tooltip box   |
+| `tooltip`          | `@Composable TooltipScope.() -> Unit` | Tooltip content                |
+| `state`            | `TooltipState`                        | State of the tooltip           |
+| `focusable`        | `Boolean`                             | Whether tooltip can be focused |
+| `enableUserInput`  | `Boolean`                             | Enable user interactions       |
+| `positionProvider` | `PopupPositionProvider`               | Custom position provider       |
+| `content`          | `@Composable () -> Unit`              | Content that triggers tooltip  |
+
+### Tooltip Parameters
+
+| Parameter         | Type                     | Description               |
+| ----------------- | ------------------------ | ------------------------- |
+| `modifier`        | `Modifier`               | Modifier for the tooltip  |
+| `caretSize`       | `DpSize`                 | Size of the tooltip caret |
+| `maxWidth`        | `Dp`                     | Maximum width of tooltip  |
+| `shape`           | `Shape`                  | Shape of the tooltip      |
+| `containerColor`  | `Color`                  | Background color          |
+| `shadowElevation` | `Dp`                     | Elevation shadow size     |
+| `content`         | `@Composable () -> Unit` | Content inside tooltip    |
+
+### TooltipState Methods
+
+| Method      | Description           |
+| ----------- | --------------------- |
+| `show()`    | Shows the tooltip     |
+| `dismiss()` | Dismisses the tooltip |

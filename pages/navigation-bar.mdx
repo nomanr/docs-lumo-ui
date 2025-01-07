@@ -3,4 +3,98 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Navigation Bar
 
-<Video src="https://files.catbox.moe/zhkd3a.mp4" />
+A bottom navigation component that lets users navigate between primary destinations.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+<Video src="https://files.catbox.moe/n3k8p9.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add NavigationBar
+```
+
+## Usage
+
+### Basic Navigation Bar
+
+```kotlin copy
+var selectedItem by remember { mutableStateOf("home") }
+val items = mapOf(
+    "home" to "Home",
+    "search" to "Search",
+    "profile" to "Profile"
+)
+
+NavigationBar {
+    items.forEach { (key, label) ->
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Home, contentDescription = label) },
+            label = { Text(label) },
+            selected = selectedItem == key,
+            onClick = { selectedItem = key }
+        )
+    }
+}
+```
+
+### Custom Navigation Bar
+
+```kotlin copy
+NavigationBar(
+    containerColor = AppTheme.colors.surface,
+    contentColor = AppTheme.colors.onSurface
+) {
+    NavigationBarItem(
+        selected = selected,
+        onClick = { /* Handle click */ },
+        icon = { Icon(Icons.Default.Home, "Home") },
+        label = { Text("Home") },
+        colors = NavigationBarItemDefaults.colors(
+            selectedIconColor = AppTheme.colors.primary,
+            selectedTextColor = AppTheme.colors.primary
+        )
+    )
+}
+```
+
+## API Documentation
+
+### NavigationBar
+
+The container component that holds navigation items.
+
+#### Parameters
+
+| Parameter        | Type                              | Default             | Description                     |
+| ---------------- | --------------------------------- | ------------------- | ------------------------------- |
+| `modifier`       | `Modifier`                        | `Modifier`          | Modifier for the container      |
+| `containerColor` | `Color`                           | `background`        | Background color of the nav bar |
+| `contentColor`   | `Color`                           | `contentColorFor()` | Color of the content            |
+| `windowInsets`   | `WindowInsets`                    | `systemBars`        | Window insets for the nav bar   |
+| `content`        | `@Composable RowScope.() -> Unit` | -                   | Navigation items content        |
+
+### NavigationBarItem
+
+Individual navigation items within the bar.
+
+#### Parameters
+
+| Parameter           | Type                        | Default             | Description                         |
+| ------------------- | --------------------------- | ------------------- | ----------------------------------- |
+| `selected`          | `Boolean`                   | -                   | Whether this item is selected       |
+| `onClick`           | `() -> Unit`                | -                   | Called when this item is clicked    |
+| `icon`              | `@Composable () -> Unit`    | -                   | Icon content for this item          |
+| `modifier`          | `Modifier`                  | `Modifier`          | Modifier for the item               |
+| `enabled`           | `Boolean`                   | `true`              | Whether the item is enabled         |
+| `label`             | `@Composable (() -> Unit)?` | `null`              | Optional text label for this item   |
+| `alwaysShowLabel`   | `Boolean`                   | `true`              | Show label regardless of selection  |
+| `colors`            | `NavigationBarItemColors`   | `defaults.colors()` | Colors for different item states    |
+| `textStyle`         | `TextStyle`                 | `typography.label2` | Text style for the label            |
+| `interactionSource` | `MutableInteractionSource`  | `remember{}`        | Source of interactions for the item |

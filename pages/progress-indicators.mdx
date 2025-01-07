@@ -3,4 +3,85 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Progress Indicators
 
+Components that express an unspecified wait time or display the length of a process.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/dkashj.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add ProgressIndicators
+```
+
+## Usage
+
+### Linear Progress Indicator
+
+```kotlin copy
+// Determinate
+LinearProgressIndicator(
+    progress = 0.7f,
+    color = AppTheme.colors.primary,
+    trackColor = AppTheme.colors.surface
+)
+
+// Indeterminate
+LinearProgressIndicator(
+    color = AppTheme.colors.primary,
+    trackColor = AppTheme.colors.surface
+)
+```
+
+### Circular Progress Indicator
+
+```kotlin copy
+// Determinate
+CircularProgressIndicator(
+    progress = 0.7f,
+    color = AppTheme.colors.primary,
+    trackColor = AppTheme.colors.surface
+)
+
+// Indeterminate
+CircularProgressIndicator(
+    color = AppTheme.colors.primary,
+    trackColor = AppTheme.colors.surface
+)
+```
+
+## API Documentation
+
+### Progress Indicator Types
+
+| Component                   | Description                          |
+| --------------------------- | ------------------------------------ |
+| `LinearProgressIndicator`   | Horizontal progress indicator        |
+| `CircularProgressIndicator` | Circular spinning progress indicator |
+
+### Linear Progress Indicator Parameters
+
+| Parameter    | Type        | Default       | Description                 |
+| ------------ | ----------- | ------------- | --------------------------- |
+| `progress`   | `Float`     | -             | Progress value (0.0 to 1.0) |
+| `modifier`   | `Modifier`  | `Modifier`    | Modifier for the indicator  |
+| `color`      | `Color`     | `primary`     | Color of the progress bar   |
+| `trackColor` | `Color`     | `transparent` | Color of the track          |
+| `strokeCap`  | `StrokeCap` | `Round`       | Style of the line ends      |
+
+### Circular Progress Indicator Parameters
+
+| Parameter     | Type        | Default       | Description                  |
+| ------------- | ----------- | ------------- | ---------------------------- |
+| `progress`    | `Float`     | -             | Progress value (0.0 to 1.0)  |
+| `modifier`    | `Modifier`  | `Modifier`    | Modifier for the indicator   |
+| `color`       | `Color`     | `primary`     | Color of the progress circle |
+| `trackColor`  | `Color`     | `transparent` | Color of the track           |
+| `strokeWidth` | `Dp`        | `4.dp`        | Width of the progress line   |
+| `strokeCap`   | `StrokeCap` | `Square`      | Style of the line ends       |

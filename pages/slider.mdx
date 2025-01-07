@@ -1,6 +1,93 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
+import ComposablesCallout from "@components/composables-callout";
 
 # Slider
 
-<Video src="https://files.catbox.moe/jxa7h3.mp4" />
+A component that allows users to make selections from a range of values.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+<Video src="https://files.catbox.moe/p9k3m2.mp4" />
+
+<br />
+
+## Installation
+
+Slider uses the slider implementation from the [composables](https://github.com/nomanr/composables/tree/main/composables/src/main/java/com/nomanr/composables/slider) library.
+
+<ComposablesCallout />
+
+```kotlin copy
+dependencies {
+    api("com.nomanr:composables:$version")
+}
+```
+
+Then add the component:
+
+```bash copy
+./gradlew lumo --add Slider
+```
+
+## Usage
+
+### Basic Slider
+
+```kotlin copy
+var value by remember { mutableFloatStateOf(0.5f) }
+
+Slider(
+    value = value,
+    onValueChange = { value = it }
+)
+```
+
+### Range Slider
+
+```kotlin copy
+var range by remember { mutableStateOf(0.2f..0.8f) }
+
+RangeSlider(
+    value = range,
+    onValueChange = { range = it },
+    valueRange = 0f..100f,
+    steps = 4,
+    colors = SliderDefaults.colors(
+        thumbColor = AppTheme.colors.primary,
+        activeTrackColor = AppTheme.colors.primary
+    )
+)
+```
+
+## API Documentation
+
+### Slider Parameters
+
+| Parameter           | Type                       | Description                   |
+| ------------------- | -------------------------- | ----------------------------- |
+| `value`             | `Float`                    | Current value of the slider   |
+| `onValueChange`     | `(Float) -> Unit`          | Called when value changes     |
+| `modifier`          | `Modifier`                 | Modifier for the slider       |
+| `enabled`           | `Boolean`                  | Whether the slider is enabled |
+| `valueRange`        | `ClosedRange<Float>`       | Range of valid values         |
+| `steps`             | `Int`                      | Number of discrete steps      |
+| `colors`            | `SliderColors`             | Colors for different states   |
+| `interactionSource` | `MutableInteractionSource` | Source of interactions        |
+
+### RangeSlider Parameters
+
+| Parameter                | Type                           | Description                        |
+| ------------------------ | ------------------------------ | ---------------------------------- |
+| `value`                  | `ClosedRange<Float>`           | Current range values               |
+| `onValueChange`          | `(ClosedRange<Float>) -> Unit` | Called when range changes          |
+| `modifier`               | `Modifier`                     | Modifier for the slider            |
+| `enabled`                | `Boolean`                      | Whether the slider is enabled      |
+| `valueRange`             | `ClosedRange<Float>`           | Range of valid values              |
+| `steps`                  | `Int`                          | Number of discrete steps           |
+| `colors`                 | `SliderColors`                 | Colors for different states        |
+| `startInteractionSource` | `MutableInteractionSource`     | Source of start thumb interactions |
+| `endInteractionSource`   | `MutableInteractionSource`     | Source of end thumb interactions   |

@@ -3,4 +3,88 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Radio Button
 
-<Video src="https://files.catbox.moe/2bfbvb.mp4" />
+A selectable button that allows choosing one option from a set.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+<Video src="https://files.catbox.moe/u8cdcg.mov" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add RadioButton
+```
+
+## Usage
+
+### Basic Radio Button
+
+```kotlin copy
+var selectedOption by remember { mutableStateOf("option1") }
+
+RadioButton(
+    selected = selectedOption == "option1",
+    onClick = { selectedOption = "option1" }
+)
+```
+
+### Radio Button with Label
+
+```kotlin copy
+RadioButton(
+    selected = selected,
+    onClick = { onOptionSelected() },
+    content = {
+        Text(
+            text = "Option Label",
+            modifier = Modifier.padding(start = 8.dp)
+        )
+    }
+)
+```
+
+### Radio Group
+
+```kotlin copy
+val options = listOf("Option 1", "Option 2", "Option 3")
+var selectedOption by remember { mutableStateOf(options[0]) }
+
+Column {
+    options.forEach { option ->
+        Row(
+            modifier = Modifier.padding(vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = selectedOption == option,
+                onClick = { selectedOption = option },
+                content = {
+                    Text(
+                        text = option,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
+            )
+        }
+    }
+}
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter           | Type                        | Description                           |
+| ------------------- | --------------------------- | ------------------------------------- |
+| `modifier`          | `Modifier`                  | Modifier for the radio button         |
+| `selected`          | `Boolean`                   | Whether the radio button is selected  |
+| `onClick`           | `(() -> Unit)?`             | Callback when button is clicked       |
+| `enabled`           | `Boolean`                   | Whether the button is enabled         |
+| `colors`            | `RadioButtonColors`         | Colors for different states           |
+| `interactionSource` | `MutableInteractionSource`  | Source of interactions for the button |
+| `content`           | `@Composable (() -> Unit)?` | Optional content                      |

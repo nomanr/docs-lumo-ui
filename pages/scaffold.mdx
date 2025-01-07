@@ -3,4 +3,89 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Scaffold
 
+A basic layout structure that provides a foundation for organizing content and common UI elements.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/ejw30t.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Scaffold
+```
+
+## Usage
+
+### Basic Scaffold
+
+```kotlin copy
+Scaffold(
+    topBar = {
+        TopAppBar(
+            title = { Text("App Title") }
+        )
+    },
+    content = { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            Text("Content")
+        }
+    }
+)
+```
+
+### Scaffold with Navigation, Snackbar and FAB
+
+```kotlin copy
+var showSnackbar by remember { mutableStateOf(false) }
+val snackbarHostState = remember { SnackbarHostState() }
+
+Scaffold(
+    topBar = {
+        TopAppBar(title = { Text("App Title") })
+    },
+    bottomBar = {
+        NavigationBar {
+            // Navigation items
+        }
+    },
+    snackbarHost = {
+        SnackbarHost(snackbarHostState)
+    },
+    floatingActionButton = {
+        FloatingActionButton(
+            onClick = { /* Handle click */ }
+        ) {
+            Icon(Icons.Default.Add, "Add")
+        }
+    },
+    content = { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            Text("Content with bottom bar")
+        }
+    }
+)
+
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter                      | Type                                  | Description                      |
+| ------------------------------ | ------------------------------------- | -------------------------------- |
+| `modifier`                     | `Modifier`                            | Modifier for the scaffold        |
+| `topBar`                       | `@Composable () -> Unit`              | Top app bar content              |
+| `bottomBar`                    | `@Composable () -> Unit`              | Bottom bar content               |
+| `snackbarHost`                 | `@Composable () -> Unit`              | Snackbar host content            |
+| `floatingActionButton`         | `@Composable () -> Unit`              | Floating action button content   |
+| `floatingActionButtonPosition` | `FabPosition`                         | Position of the FAB              |
+| `containerColor`               | `Color`                               | Background color of the scaffold |
+| `contentColor`                 | `Color`                               | Content color of the scaffold    |
+| `contentWindowInsets`          | `WindowInsets`                        | Window insets for the content    |
+| `content`                      | `@Composable (PaddingValues) -> Unit` | Main content of the scaffold     |

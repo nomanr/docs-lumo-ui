@@ -3,4 +3,92 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Snackbar
 
+A lightweight message with an optional action that appears at the bottom of the screen.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/plop51.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Snackbar
+```
+
+## Usage
+
+### Basic Snackbar
+
+```kotlin copy
+val snackbarHostState = remember { SnackbarHostState() }
+
+Scaffold(
+    snackbarHost = {
+        SnackbarHost(hostState = snackbarHostState)
+    },
+    content = { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            Button(
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Message sent",
+                            actionLabel = "Undo"
+                        )
+                    }
+                }
+            ) {
+                Text("Show Snackbar")
+            }
+        }
+    }
+)
+
+```
+
+### Custom Snackbar
+
+```kotlin copy
+Snackbar(
+    snackbarData = snackbarData,
+    shape = RoundedCornerShape(12.dp),
+    containerColor = AppTheme.colors.surface,
+    contentColor = AppTheme.colors.onSurface,
+    actionColor = AppTheme.colors.primary,
+    dismissActionContentColor = AppTheme.colors.onSurface
+)
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter                   | Type           | Description                        |
+| --------------------------- | -------------- | ---------------------------------- |
+| `snackbarData`              | `SnackbarData` | Data for the snackbar              |
+| `modifier`                  | `Modifier`     | Modifier for the snackbar          |
+| `shape`                     | `Shape`        | Shape of the snackbar container    |
+| `containerColor`            | `Color`        | Background color of the snackbar   |
+| `contentColor`              | `Color`        | Color of the message text          |
+| `actionColor`               | `Color`        | Color of the action button         |
+| `actionContentColor`        | `Color`        | Color of the action button text    |
+| `dismissActionContentColor` | `Color`        | Color of the dismiss action button |
+
+### SnackbarHostState Methods
+
+| Method         | Parameters                                                                                                     | Description                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `showSnackbar` | `message: String`<br/>`actionLabel: String?`<br/>`withDismissAction: Boolean`<br/>`duration: SnackbarDuration` | Shows a snackbar with given params |
+
+### SnackbarDuration
+
+| Value        | Description                            |
+| ------------ | -------------------------------------- |
+| `Short`      | Shows for a short duration (4 seconds) |
+| `Long`       | Shows for a long duration (10 seconds) |
+| `Indefinite` | Shows until explicitly dismissed       |

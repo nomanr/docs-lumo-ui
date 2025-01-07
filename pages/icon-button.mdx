@@ -3,4 +3,78 @@ import Tag, { TagContainer } from "@components/tag";
 
 # Icon Button
 
+A clickable icon with different styles and shapes.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
 <Video src="https://files.catbox.moe/bdbibx.mp4" />
+
+<br />
+
+## Installation
+
+```bash copy
+./gradlew lumo --add IconButton
+```
+
+## Usage
+
+### Basic Icon Button
+
+```kotlin copy
+IconButton(
+    variant = IconButtonVariant.Primary,
+    onClick = { /* Handle click */ }
+) {
+    Icon(Icons.Default.Star, contentDescription = "Star")
+}
+```
+
+### Shaped Icon Button
+
+```kotlin copy
+IconButton(
+    variant = IconButtonVariant.Primary,
+    shape = IconButtonDefaults.ButtonCircleShape,
+    onClick = { /* Handle click */ }
+) {
+    Icon(Icons.Default.Add, contentDescription = "Add")
+}
+```
+
+## API Documentation
+
+### IconButton Variants
+
+| Type     | Variant               | Description                             |
+| -------- | --------------------- | --------------------------------------- |
+| Filled   | `Primary`             | Solid background with primary color     |
+|          | `Secondary`           | Solid background with secondary color   |
+|          | `Destructive`         | Solid background with error color       |
+| Outlined | `PrimaryOutlined`     | Primary color border and icon           |
+|          | `SecondaryOutlined`   | Secondary color border and icon         |
+|          | `DestructiveOutlined` | Error color border and icon             |
+| Elevated | `PrimaryElevated`     | Primary color with elevation            |
+|          | `SecondaryElevated`   | Secondary color with elevation          |
+|          | `DestructiveElevated` | Error color with elevation              |
+| Ghost    | `PrimaryGhost`        | Transparent with primary colored icon   |
+|          | `SecondaryGhost`      | Transparent with secondary colored icon |
+|          | `DestructiveGhost`    | Transparent with error colored icon     |
+|          | `Ghost`               | Transparent with current content color  |
+
+### Parameters
+
+| Parameter           | Type                       | Description                           |
+| ------------------- | -------------------------- | ------------------------------------- |
+| `modifier`          | `Modifier`                 | Modifier for the button               |
+| `enabled`           | `Boolean`                  | Whether the button is enabled         |
+| `loading`           | `Boolean`                  | Whether to show loading state         |
+| `variant`           | `IconButtonVariant`        | Style variant of the button           |
+| `shape`             | `Shape`                    | Shape of the button                   |
+| `onClick`           | `() -> Unit`               | Callback when button is clicked       |
+| `contentPadding`    | `PaddingValues`            | Padding around the icon               |
+| `interactionSource` | `MutableInteractionSource` | Source of interactions for the button |
+| `content`           | `@Composable () -> Unit`   | Icon content to display               |

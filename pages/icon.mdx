@@ -1,4 +1,52 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
 
-# Icon Button
+# Icon
+
+A graphic symbol that represents an action, file, device, directory, or common operation.
+
+<TagContainer>
+  <Tag>Android</Tag>
+  <Tag>Kotlin Multiplatform</Tag>
+</TagContainer>
+
+## Installation
+
+```bash copy
+./gradlew lumo --add Icon
+```
+
+## Usage
+
+### Basic Icon
+
+```kotlin copy
+Icon(
+    imageVector = Icons.Default.Star,
+    contentDescription = "Star Icon"
+)
+```
+
+### Resource Icon
+
+```kotlin copy
+Icon(
+    resourceId = R.drawable.ic_icon,
+    contentDescription = "Resource Icon",
+    tint = AppTheme.colors.primary
+)
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter            | Type               | Description                         |
+| -------------------- | ------------------ | ----------------------------------- |
+| `imageVector`        | `ImageVector`      | Vector icon to display              |
+| `resourceId`         | `@DrawableRes Int` | Resource ID of the drawable         |
+| `bitmap`             | `ImageBitmap`      | Bitmap image to display             |
+| `painter`            | `Painter`          | Custom painter for drawing the icon |
+| `modifier`           | `Modifier`         | Modifier for the icon               |
+| `contentDescription` | `String?`          | Accessibility description           |
+| `tint`               | `Color`            | Color tint applied to the icon      |

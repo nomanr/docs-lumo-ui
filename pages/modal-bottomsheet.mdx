@@ -1,6 +1,94 @@
 import Video from "@components/video";
 import Tag, { TagContainer } from "@components/tag";
+import ComposablesCallout from "@components/composables-callout";
 
-# Modal Bottomsheet
+# Modal Bottom Sheet
+
+A modal dialog that slides up from the bottom of the screen.
+
+<TagContainer>
+  <Tag>Android</Tag>
+</TagContainer>
 
 <Video src="https://files.catbox.moe/2bfbvb.mp4" />
+
+<br />
+
+## Installation
+
+Modal Bottom Sheet uses the bottom sheet implementation from the [composables](https://github.com/nomanr/composables/tree/main/composables/src/main/java/com/nomanr/composables/bottomsheet) library.
+
+<ComposablesCallout />
+
+```kotlin copy
+dependencies {
+    api("com.nomanr:composables:$version")
+}
+```
+
+Then add the component:
+
+```bash copy
+./gradlew lumo --add ModalBottomSheet
+```
+
+## Usage
+
+### Basic Bottom Sheet
+
+```kotlin copy
+var isVisible by remember { mutableStateOf(false) }
+
+ModalBottomSheet(
+    isVisible = isVisible,
+    onDismissRequest = { isVisible = false }
+) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Bottom Sheet Content")
+    }
+}
+```
+
+### Custom Bottom Sheet
+
+```kotlin copy
+val sheetState = rememberModalBottomSheetState()
+
+ModalBottomSheet(
+    sheetState = sheetState,
+    isVisible = isVisible,
+    onDismissRequest = { isVisible = false },
+    sheetGesturesEnabled = true,
+    dragHandle = {
+        Box(
+            modifier = Modifier
+                .padding(12.dp)
+                .background(color = Color.Unspecified)
+        ) {
+            Spacer(
+                Modifier
+                    .size(width = 36.dp, height = 6.dp)
+                    .background(
+                        color = AppTheme.colors.secondary,
+                        shape = RoundedCornerShape(50)
+                    )
+            )
+        }
+    }
+) {
+    // Sheet content
+}
+```
+
+## API Documentation
+
+### Parameters
+
+| Parameter              | Type                                 | Description                      |
+| ---------------------- | ------------------------------------ | -------------------------------- |
+| `sheetState`           | `SheetState`                         | State of the bottom sheet        |
+| `isVisible`            | `Boolean`                            | Whether the sheet is visible     |
+| `onDismissRequest`     | `() -> Unit`                         | Callback when sheet is dismissed |
+| `sheetGesturesEnabled` | `Boolean`                            | Whether gestures are enabled     |
+| `dragHandle`           | `@Composable (() -> Unit)?`          | Optional custom drag handle      |
+| `content`              | `@Composable ColumnScope.() -> Unit` | Content to display in the sheet  |

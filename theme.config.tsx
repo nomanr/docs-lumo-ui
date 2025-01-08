@@ -37,7 +37,7 @@ const config: DocsThemeConfig = {
     component: null,
   },
   footer: {
-    content: "Lumo UI Docs © 2024",
+    content: "Copyright © Noman R",
   },
   head: function useHead() {
     const config = useConfig();

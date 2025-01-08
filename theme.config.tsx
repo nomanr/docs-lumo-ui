@@ -1,5 +1,6 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import React, { ReactElement, ComponentProps } from "react";
+import { useConfig } from "nextra-theme-docs";
 
 export const Logo = (props: ComponentProps<"svg">): ReactElement => (
   <div style={{ display: "flex", alignItems: "center" }}>
@@ -23,15 +24,6 @@ export const Logo = (props: ComponentProps<"svg">): ReactElement => (
 );
 
 const config: DocsThemeConfig = {
-  logo: Logo,
-
-  project: {
-    link: "https://github.com/nomanr/lumo-ui",
-  },
-  docsRepositoryBase: "https://github.com/nomanr/lumo-ui/blob/main/",
-  footer: {
-    content: "Lumo UI Docs © 2024",
-  },
   color: {
     hue: 0,
     saturation: 0,
@@ -40,7 +32,44 @@ const config: DocsThemeConfig = {
       light: 44,
     },
   },
-
+  docsRepositoryBase: "https://github.com/nomanr/lumo-ui",
+  editLink: {
+    component: null,
+  },
+  footer: {
+    content: "Lumo UI Docs © 2024",
+  },
+  head: function useHead() {
+    const config = useConfig();
+    const title = `${config.title} – Lumo UI`;
+    return (
+      <>
+        <title>{title}</title>
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <meta name="apple-mobile-web-app-title" content="Lumo UI" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </>
+    );
+  },
+  logo: Logo,
+  project: {
+    link: "https://github.com/nomanr/lumo-ui",
+  },
+  sidebar: {
+    autoCollapse: true,
+  },
   // @ts-expect-error
   useNextSeoProps: () => {
     return {

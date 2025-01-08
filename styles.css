@@ -21,3 +21,8 @@
   padding: 4px 8px;
   display: inline-block;
 }
+
+.sidebar-title.new {
+  background-color: #000;
+  color: #fff;
+}

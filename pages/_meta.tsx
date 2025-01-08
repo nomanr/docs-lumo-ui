@@ -7,6 +7,9 @@ export default {
   index: "Introduction",
   setup: "Setup and configuration",
   composables: "Composables",
+  "kmp-support": {
+    title: "Kotlin Multiplatform",
+  },
   cli: "CLI",
   changelog: {
     title: "Changelog",
@@ -18,6 +21,7 @@ export default {
     title: "Components",
     type: "separator",
   },
+
   accordion: "Accordion",
   "alert-dialog": "Alert Dialog",
   badge: "Badge",

@@ -1,4 +1,10 @@
+import GetFromGooglePlay from "@components/GetFromGooglePlay";
+
 export default {
+  "get-from-google-play": {
+    type: "separator",
+    title: <GetFromGooglePlay />,
+  },
   "getting-started-section": {
     title: "Getting Started",
     type: "separator",

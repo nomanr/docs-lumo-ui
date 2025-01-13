@@ -10,6 +10,7 @@ Apply and configure the plugin.
 You can apply the plugin to either the root or the module level `build.gradle` file.
 
 **Option 1: Apply to root level**
+
 [![Maven Central](https://img.shields.io/maven-central/v/com.nomanr/lumo)](https://search.maven.org/artifact/com.nomanr/lumo)
 
 ```kotlin copy
@@ -24,12 +25,14 @@ plugins {
 ```kotlin copy
 // root level build.gradle.kts
 plugins {
-    id ("com.nomanr.plugin.lumo") version "0.0.1-alpha.4" apply false
+    id ("com.nomanr.plugin.lumo") version "$latest" apply false
+    // alias(libs.plugins.lumo) apply false -- from the catalog
 }
 
 // module level e.g. ui-components/build.gradle.kts
 plugins {
     id("com.nomanr.plugin.lumo")
+    // alias(libs.plugins.lumo) -- from the catalog
 }
 ```
 

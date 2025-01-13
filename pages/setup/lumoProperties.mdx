@@ -11,6 +11,7 @@ import { Callout } from "nextra/components";
 
 ThemeName=AppTheme
 ComponentsDir=ui-components/src/main/java/com/nomanr/ui_components
+# Windows: ComponentsDir=ui-components\src\main\java\com\nomanr\ui_components
 PackageName=com.nomanr.ui_components
 ```
 
@@ -48,7 +49,10 @@ The `lumo.properties` file contains the necessary configurations for the plugin.
     </Tr>
     <Tr>
       <Td>`ComponentsDir`</Td>
-      <Td>The directory where the components will be generated.</Td>
+      <Td>
+        The directory where the components will be generated, relative to the
+        project root.
+      </Td>
     </Tr>
     <Tr>
       <Td>`PackageName`</Td>

@@ -5,11 +5,10 @@ import Image from "next/image";
 interface VideoProps {
   src: string;
   caption?: string;
-  ratio: number;
-  thumbnail?: string;
+  poster?: string;
 }
 
-export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
+export default function Video({ src, caption, poster }: VideoProps) {
   const [inViewRef, inView] = useInView({ threshold: 1 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true);
@@ -53,8 +52,6 @@ export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
         borderRadius: "8px",
       }}
     >
-      <div style={{ paddingBottom: ratio * 100 + "%" }} />
-
       <video
         loop
         muted
@@ -62,7 +59,7 @@ export default function Video({ src, caption, ratio, thumbnail }: VideoProps) {
         playsInline
         ref={setRefs}
         style={{ borderRadius: "8px" }}
-        poster={"/images/placeholder.png"}
+        poster={poster}
         onPlaying={() => setLoading(false)}
       >
         <source src={src} type="video/mp4" />

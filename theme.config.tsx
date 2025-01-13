@@ -69,9 +69,6 @@ const config: DocsThemeConfig = {
         <meta property="og:url" content="https://lumo.nomanr.com" />
 
         <meta property="og:image" content="open-graph.png" />
-
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
       </>
     );
   },

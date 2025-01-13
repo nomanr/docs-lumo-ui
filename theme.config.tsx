@@ -68,7 +68,10 @@ const config: DocsThemeConfig = {
 
         <meta property="og:url" content="https://lumo.nomanr.com" />
 
-        <meta property="og:image" content="open-graph.png" />
+        <meta
+          property="og:image"
+          content="https://files.catbox.moe/19cnk1.png"
+        />
       </>
     );
   },

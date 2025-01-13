@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://lumo.nomanr.com
+
+# Sitemaps
+Sitemap: https://lumo.nomanr.com/sitemap.xml

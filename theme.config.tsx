@@ -60,6 +60,18 @@ const config: DocsThemeConfig = {
         />
         <meta name="apple-mobile-web-app-title" content="Lumo UI" />
         <link rel="manifest" href="site.webmanifest" />
+        <meta property="og:title" content="Lumo UI - A Gradle Plugin" />
+        <meta
+          property="og:description"
+          content="Build your own component library using Jetpack Compose."
+        />
+
+        <meta property="og:url" content="https://lumo.nomanr.com" />
+
+        <meta property="og:image" content="open-graph.png" />
+
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </>
     );
   },

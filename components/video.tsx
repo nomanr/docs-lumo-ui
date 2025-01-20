@@ -6,19 +6,32 @@ interface VideoProps {
   src: string;
   caption?: string;
   poster?: string;
+  controls?: boolean;
+  preload?: string;
+  style?: React.CSSProperties;
+  showControlsOnClick?: boolean;
 }
 
-export default function Video({ src, caption, poster }: VideoProps) {
+export default function Video({
+  src,
+  caption,
+  poster,
+  controls = false,
+  preload = "auto",
+  style,
+  showControlsOnClick = false,
+}: VideoProps) {
   const [inViewRef, inView] = useInView({ threshold: 1 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showControls, setShowControls] = useState(controls);
 
   const setRefs = useCallback(
     (node: HTMLVideoElement | null) => {
       videoRef.current = node;
       inViewRef(node);
 
-      if (node) {
+      if (node && !showControlsOnClick) {
         node.addEventListener("click", function () {
           if (this.paused) {
             this.play();
@@ -27,8 +40,14 @@ export default function Video({ src, caption, poster }: VideoProps) {
           }
         });
       }
+
+      if (node && showControlsOnClick) {
+        node.addEventListener("click", function () {
+          setShowControls(true);
+        });
+      }
     },
-    [inViewRef]
+    [inViewRef, showControlsOnClick]
   );
 
   useEffect(() => {
@@ -44,38 +63,28 @@ export default function Video({ src, caption, poster }: VideoProps) {
   }, [inView]);
 
   return (
-    <div
-      style={{
-        position: "relative",
-        margin: "2rem 1rem",
-        overflow: "hidden",
-        borderRadius: "8px",
-      }}
-    >
+    <div style={{ ...style, position: "relative" }}>
       <video
-        loop
-        muted
-        autoPlay
+        loop={!showControls}
+        muted={!showControls}
+        autoPlay={!showControls}
         playsInline
+        controls={showControls}
+        preload={preload}
         ref={setRefs}
-        style={{ borderRadius: "8px" }}
         poster={poster}
         onPlaying={() => setLoading(false)}
       >
         <source src={src} type="video/mp4" />
       </video>
 
-      {loading && (
+      {loading && !showControls && (
         <div
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
           }}
         >
           <Spinner />

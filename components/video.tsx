@@ -63,7 +63,15 @@ export default function Video({
   }, [inView]);
 
   return (
-    <div style={{ ...style, position: "relative", marginTop: "1.5rem" }}>
+    <div
+      style={{
+        ...style,
+        position: "relative",
+        marginTop: "1.5rem",
+        borderRadius: "8px",
+        overflow: "hidden",
+      }}
+    >
       <video
         loop={!showControls}
         muted={!showControls}

@@ -1,15 +1,9 @@
-import DownloadAPK from "@components/DownloadAPK";
-import GetFromGooglePlay from "@components/GetFromGooglePlay";
+import DemoLink from "@components/demo-link";
 
 export default {
   "demo-apk": {
     type: "separator",
-    title: <DownloadAPK />,
-  },
-  "get-from-google-play": {
-    type: "separator",
-    title: <GetFromGooglePlay />,
-    display: "hidden",
+    title: <DemoLink />,
   },
   "getting-started-section": {
     title: "Getting Started",

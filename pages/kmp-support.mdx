@@ -1,22 +1,51 @@
 import { Callout } from "nextra/components";
+import { FileTree } from "nextra/components";
+import PlatformAndSampleButtons from "@components/platform-and-sample-buttons";
 
 # Kotlin Multiplatform Support
 
-<Callout emoji="🚧">
-  Kotlin Multiplatform support is currently a work in progress. Full support
-  across all platforms is coming soon.
-</Callout>
+Lumo UI provides full support for Kotlin Multiplatform (KMP) projects using Compose Multiplatform. All components are designed to work seamlessly across different platforms while maintaining a consistent look and feel.
 
-## Current Status
+### Getting Started
 
-While most Lumo UI components are designed with Compose Multiplatform in mind, some platform-specific adjustments are needed for full compatibility. For example, font handling differs between Android and Compose Multiplatform.
+Update `lumo.properties` to add the following property:
 
-<Callout type="info">
-  You should be able to use most components with Compose Multiplatform, but you
-  may need to make some adjustments manually.
-</Callout>
+```properties {9}
+# Lumo UI Plugin
+# This file is used to store configurations for the Lumo UI Plugin
+# Do not delete this file
 
-<Callout>
-  Follow our [GitHub repository](https://github.com/nomanr/lumo-ui) for updates
-  on Kotlin Multiplatform support progress.
-</Callout>
+ThemeName=AppTheme
+ComponentsDir=ui-components/src/main/java/com/nomanr/ui_components
+# Windows: ComponentsDir=ui-components\src\main\java\com\nomanr\ui_components
+PackageName=com.nomanr.ui_components
+KotlinMultiplatform=true
+```
+
+### Component generation
+
+If a component requires platform-specific implementation, the plugin will generate the native code for each supported platform.
+
+<FileTree>
+  <FileTree.Folder name="myProject" defaultOpen>
+    <FileTree.Folder name="app" defaultOpen />
+    <FileTree.Folder name="ui-components" defaultOpen>
+      <FileTree.Folder name="androidMain" defaultOpen>
+        <FileTree.Folder name="Tooltip.android.kt " />
+      </FileTree.Folder>
+      <FileTree.Folder name="commonMain" defaultOpen>
+        <FileTree.Folder name="Tooltip.kt" />
+      </FileTree.Folder>
+      <FileTree.Folder name="iosMain" defaultOpen>
+        <FileTree.Folder name="Tooltip.ios.kt" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+Each component is tagged to indicate which platforms it supports.
+
+<PlatformAndSampleButtons
+  androidSample={"TooltipSample.kt"}
+  multiplatformSample={"TooltipSample.kt"}
+/>

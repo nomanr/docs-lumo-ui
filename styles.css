@@ -38,19 +38,9 @@
   display: inline-block;
 }
 
-[data-theme="light"] .sidebar-title.new {
-  background-color: #000;
+.sidebar-title.new {
+  background-color: #1e90ff;
   color: #fff;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 4px 8px;
-  display: inline-block;
-}
-
-[data-theme="dark"] .sidebar-title.new {
-  background-color: #fff;
-  color: #000;
   border-radius: 20px;
   font-size: 10px;
   font-weight: bold;

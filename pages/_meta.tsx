@@ -1,5 +1,7 @@
 import DemoLink from "@components/demo-link";
 
+const newTag = <span className="sidebar-title new">New</span>;
+
 export default {
   "demo-apk": {
     type: "separator",
@@ -14,7 +16,7 @@ export default {
   setup: "Setup and configuration",
   composables: "Composables",
   "kmp-support": {
-    title: "Kotlin Multiplatform",
+    title: <div>Kotlin Multiplatform {newTag}</div>,
   },
   cli: "CLI",
   changelog: {

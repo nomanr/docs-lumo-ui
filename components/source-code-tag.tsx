@@ -1,4 +1,4 @@
-import ExternalLinkTag from "./external-link-tag";
+import ExternalLinkTag from "./external-link-button";
 import { useConfig } from "nextra-theme-docs";
 import { useThemeConfig } from "nextra-theme-docs";
 

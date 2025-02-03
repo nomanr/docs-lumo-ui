@@ -22,7 +22,38 @@
   display: inline-block;
 }
 
-.sidebar-title.new {
+.nextra-external-link-dark {
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.nextra-external-link-light {
+  color: #000;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+[data-theme="light"] .sidebar-title.new {
   background-color: #000;
   color: #fff;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
+[data-theme="dark"] .sidebar-title.new {
+  background-color: #fff;
+  color: #000;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: inline-block;
 }

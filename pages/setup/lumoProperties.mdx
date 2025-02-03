@@ -13,7 +13,13 @@ ThemeName=AppTheme
 ComponentsDir=ui-components/src/main/java/com/nomanr/ui_components
 # Windows: ComponentsDir=ui-components\src\main\java\com\nomanr\ui_components
 PackageName=com.nomanr.ui_components
+# KotlinMultiplatform=false
 ```
+
+<Callout>
+  Use `KotlinMultiplatform` property to generate components for Compose
+  Multiplatform.
+</Callout>
 
 The `lumo.properties` is generated at the root of your project when you run the `./gradlew lumo --init` command.
 
@@ -57,6 +63,10 @@ The `lumo.properties` file contains the necessary configurations for the plugin.
     <Tr>
       <Td>`PackageName`</Td>
       <Td>Package name for the generated components</Td>
+    </Tr>
+    <Tr>
+      <Td>`KotlinMultiplatform`</Td>
+      <Td>Use `true` to generate components for Compose Multiplatform.</Td>
     </Tr>
   </tbody>
 </Table>

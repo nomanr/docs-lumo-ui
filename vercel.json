@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/demo(.*)",
+      "destination": "https://nomanr.github.io/lumo-ui/$1"
+    }
+  ]
+}

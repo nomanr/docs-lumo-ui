@@ -15,9 +15,7 @@ export default {
   index: "Introduction",
   setup: "Setup and configuration",
   composables: "Composables",
-  "kmp-support": {
-    title: <div>Kotlin Multiplatform {newTag}</div>,
-  },
+  "kmp-support": "Kotlin Multiplatform",
   cli: "CLI",
   changelog: {
     title: "Changelog",

@@ -9,7 +9,7 @@ interface DemoProps {
 export default function Demo({ componentId }: DemoProps) {
   const [isLoading, setIsLoading] = useState(true);
 
-  const baseUrl = "http://nomanr.github.io/lumo-ui";
+  const baseUrl = "https://nomanr.github.io/lumo-ui";
   // const baseUrl = "http://localhost:8080";
   const url = `${baseUrl}/?componentId=${componentId}&noBackButton`;
 

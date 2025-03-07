@@ -54,11 +54,14 @@ const PlatformAndSampleButtons = ({
         }}
       >
         {androidSampleLink && (
-          <ExternalLinkTag text="Android" href={`${androidSampleLink}`} />
+          <ExternalLinkTag
+            text="Android Sample"
+            href={`${androidSampleLink}`}
+          />
         )}
         {multiplatformSampleLink && (
           <ExternalLinkTag
-            text="Compose Multiplatform"
+            text="Multiplatform Sample"
             href={`${multiplatformSampleLink}`}
           />
         )}

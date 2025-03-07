@@ -11,7 +11,7 @@ const PlatformAndSampleButtons = ({
   multiplatformSample?: string;
   component?: string;
 }) => {
-  const repo = "https://github.com/nomanr/lumo-ui/tree/kmp-support/";
+  const repo = "https://github.com/nomanr/lumo-ui/tree/main/";
   const componentsDir = `${repo}/lumo-ui/components-lab/src/commonMain/kotlin/com/nomanr/lumo/ui/components/`;
   const nativeComponentsDir = `${repo}/lumo-ui/components-lab/src/androidMain/kotlin/com/nomanr/lumo/ui/components/native/`;
   const androidSamplesDir = `${repo}/sample-android/catalogue/src/main/java/com/nomanr/sample/ui/sample/samples/`;
@@ -41,11 +41,18 @@ const PlatformAndSampleButtons = ({
       style={{
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "flex-start",
         marginTop: "8px",
       }}
     >
-      <div style={{ display: "flex", gap: "8px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          flexWrap: "wrap",
+          marginRight: "8px",
+        }}
+      >
         {androidSampleLink && (
           <ExternalLinkTag text="Android" href={`${androidSampleLink}`} />
         )}

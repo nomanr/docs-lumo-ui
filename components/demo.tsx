@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface DemoProps {
   componentId: string;
@@ -10,8 +10,17 @@ export default function Demo({ componentId }: DemoProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const baseUrl = "https://nomanr.github.io/lumo-ui";
-  // const baseUrl = "http://localhost:8080";
   const url = `${baseUrl}/?componentId=${componentId}&noBackButton`;
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <div
@@ -31,6 +40,7 @@ export default function Demo({ componentId }: DemoProps) {
           maxWidth: "400px",
           marginTop: "-5.5rem",
           marginBottom: "-5.5rem",
+
           aspectRatio: "420/870",
           display: "flex",
           justifyContent: "center",
@@ -41,6 +51,7 @@ export default function Demo({ componentId }: DemoProps) {
           borderRadius: "2rem",
           transform: `scale(0.7)`,
           transformOrigin: "center",
+          overflow: "hidden",
         }}
       >
         {isLoading && (
@@ -66,8 +77,6 @@ export default function Demo({ componentId }: DemoProps) {
             width: "100%",
             height: "100%",
             borderRadius: "1.5rem",
-            border: "none",
-            overflow: "hidden",
           }}
           onLoad={() => {
             setIsLoading(false);

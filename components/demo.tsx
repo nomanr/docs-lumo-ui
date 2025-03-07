@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useTheme } from "nextra-theme-docs";
+import { useCallback, useEffect, useState } from "react";
 
 interface DemoProps {
   componentId: string;
@@ -9,24 +10,22 @@ interface DemoProps {
 export default function Demo({ componentId }: DemoProps) {
   const [isLoading, setIsLoading] = useState(true);
 
+  const { resolvedTheme } = useTheme();
+
   const baseUrl = "https://nomanr.github.io/lumo-ui";
   const url = `${baseUrl}/?componentId=${componentId}&noBackButton`;
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
+  const onLoaded = useCallback(() => {
+    setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    }, 1000);
   }, []);
 
   return (
     <div
       style={{
         width: "100%",
-        backgroundColor: "white",
+        backgroundColor: resolvedTheme === "dark" ? "black" : "white",
         borderRadius: "0.5rem",
         display: "flex",
         justifyContent: "center",
@@ -46,7 +45,9 @@ export default function Demo({ componentId }: DemoProps) {
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-          border: "0.65rem solid #000",
+          border: `0.65rem solid ${
+            resolvedTheme === "dark" ? "white" : "black"
+          }`,
           boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
           borderRadius: "2rem",
           transform: `scale(0.7)`,
@@ -65,9 +66,10 @@ export default function Demo({ componentId }: DemoProps) {
               alignItems: "center",
               borderRadius: "1.5rem",
               zIndex: 1,
+              backgroundColor: resolvedTheme === "dark" ? "black" : "white",
             }}
           >
-            <Spinner />
+            <Spinner color={resolvedTheme === "dark" ? "white" : "black"} />
           </div>
         )}
         <iframe
@@ -78,16 +80,14 @@ export default function Demo({ componentId }: DemoProps) {
             height: "100%",
             borderRadius: "1.5rem",
           }}
-          onLoad={() => {
-            setIsLoading(false);
-          }}
+          onLoad={onLoaded}
         />
       </div>
     </div>
   );
 }
 
-const Spinner = () => {
+const Spinner = ({ color }: { color: string }) => {
   useEffect(() => {
     const spinnerStyles = `
         @keyframes spin {
@@ -112,8 +112,8 @@ const Spinner = () => {
       style={{
         width: "24px",
         height: "24px",
-        border: "4px solid rgba(255, 255, 255, 0.1)",
-        borderTop: "4px solid #000",
+        border: `4px solid rgba(255, 255, 255, 0.1)`,
+        borderTop: `4px solid ${color}`,
         borderRadius: "50%",
         animation: "spin 1s linear infinite",
       }}

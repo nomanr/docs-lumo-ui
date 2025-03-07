@@ -36,6 +36,14 @@ const config: DocsThemeConfig = {
   editLink: {
     component: null,
   },
+  banner: {
+    key: "interactive-samples",
+    content: (
+      <p>
+        🎉 Try it out! Every sample is now interactive and ready to play with.
+      </p>
+    ),
+  },
   footer: {
     content: "Copyright © Noman R",
   },

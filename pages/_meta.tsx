@@ -14,7 +14,10 @@ export default {
 
   index: "Introduction",
   setup: "Setup and configuration",
-  composables: "Composables",
+  composables: {
+    title: "Composables",
+    display: "hidden",
+  },
   "kmp-support": "Kotlin Multiplatform",
   cli: "CLI",
   changelog: {
